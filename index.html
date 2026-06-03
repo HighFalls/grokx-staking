@@ -224,8 +224,8 @@
       image-rendering: crisp-edges;
     }
 
-    /* Token logo images (grok-rider-logo.png) - sharp at all sizes including small icons */
-    img[src="grok-rider-logo.png"] {
+    /* Token logo images (grokx-logo.png) - sharp at all sizes including small icons */
+    img[src="grokx-logo.png"] {
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
     }
@@ -272,8 +272,8 @@
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-x-3">
         <div class="logo-glow">
-          <!-- Official GROKX Logo (grok-rider-logo.png) -->
-          <img src="grok-rider-logo.png" 
+          <!-- Official GROKX Logo (grokx-logo.png) -->
+          <img src="grokx-logo.png" 
                alt="GrokX" 
                class="logo-img w-14 h-14 rounded-full object-cover"
                title="Official GROKX Logo"
@@ -312,7 +312,10 @@
                   onclick="addGrokxToMetaMask()"
                   class="flex items-center gap-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-violet-500/30 bg-violet-500/5 text-violet-400 hover:bg-violet-500/15 hover:border-violet-500/50 hover:shadow-[0_0_8px_rgba(167,139,250,0.35)] transition-all"
                   title="Add GROKX token to your MetaMask wallet">
-            <i class="fa-solid fa-plus"></i>
+            <img src="grokx-logo.png" 
+                 class="logo-img w-4 h-4 rounded-full object-cover" 
+                 alt="GROKX" 
+                 style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
             <span>Add GROKX to MetaMask</span>
           </button>
         </div>
@@ -568,8 +571,8 @@
             <div>
               <span class="text-slate-400 block text-xs">TOKEN NAME</span>
               <div class="flex items-center gap-x-2">
-                <!-- Official logo (grok-rider-logo.png) -->
-                <img src="grok-rider-logo.png" 
+                <!-- Official logo (grokx-logo.png) -->
+                <img src="grokx-logo.png" 
                      class="logo-img w-5 h-5 rounded-full object-cover" 
                      alt="GROKX Logo" 
                      title="Official GROKX Logo"
@@ -688,8 +691,8 @@
     const tokenAddress = "0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac";
     const stakingAddress = "0x8baC14C3E600eDE41A31582A28d86a2430D49e97";
 
-    // Official GROKX Logo (grok-rider-logo.png)
-    const TOKEN_LOGO_URL = 'grok-rider-logo.png';
+    // Official GROKX Logo (latest IPFS via retired-pony lighthouse for MetaMask token image; local grokx-logo.png used for on-page icons)
+    const TOKEN_LOGO_URL = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
 
     // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
     const PUBLIC_RPC = "https://rpc-test-1.archiechain.io";
@@ -1229,8 +1232,8 @@
       }
 
       try {
-        // Using the local logo asset (grok-rider-logo.png) for token metadata in MetaMask
-        const imageUrl = TOKEN_LOGO_URL;
+        // Using the token logo URL (latest IPFS https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki for reliable MetaMask, new clean astronaut helmet) for token metadata in MetaMask
+        const imageUrl = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
 
         console.log('[MetaMask] Adding GROKX token with metadata:', {
           address: tokenAddress,
@@ -1254,7 +1257,7 @@
 
         if (wasAdded) {
           showToast("GROKX successfully added to MetaMask!");
-          console.log('[MetaMask] Token added successfully with grok-rider-logo.png logo.');
+          console.log('[MetaMask] Token added successfully with new logo (grokx-logo.png via latest IPFS).');
         } else {
           console.log('[MetaMask] User cancelled or token already exists.');
         }
