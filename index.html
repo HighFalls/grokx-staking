@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GrokX • Staking on Arc Testnet</title>
+  <title>GrokX - Stake GROKX on Arc Testnet</title>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -224,6 +224,12 @@
       image-rendering: crisp-edges;
     }
 
+    /* Token logo images (grok-rider-logo.png) - sharp at all sizes including small icons */
+    img[src="grok-rider-logo.png"] {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
     /* Description text */
     [data-theme="light"] p.text-slate-400 {
       color: var(--text-secondary) !important;
@@ -266,8 +272,8 @@
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-x-3">
         <div class="logo-glow">
-          <!-- Official GROKX Logo -->
-          <img src="https://warm-orca-c322h.lighthouseweb3.xyz/ipfs/bafkreict4r2d5byc3svt2tcc2b6o2h3m6alrkjijos4hcmgvlarbyt4dxm" 
+          <!-- Official GROKX Logo (grok-rider-logo.png) -->
+          <img src="grok-rider-logo.png" 
                alt="GrokX" 
                class="logo-img w-14 h-14 rounded-full object-cover"
                title="Official GROKX Logo"
@@ -323,6 +329,19 @@
 
   <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
 
+    <!-- Testnet Demo Notice -->
+    <div class="mb-6 glass rounded-2xl p-4 border border-emerald-500/30 bg-emerald-500/5">
+      <div class="flex gap-x-3">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="fa-solid fa-info-circle text-emerald-400"></i>
+        </div>
+        <div class="text-sm leading-snug">
+          <div class="font-semibold text-emerald-400">This is a Testnet Demo Project</div>
+          <p class="text-slate-400 mt-0.5">GrokX is a fun experimental staking dApp built for learning and testing on Arc Testnet. All tokens have no real value.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Wide Banner -->
     <img src="banner0.png" alt="GrokX Banner" 
          class="w-full max-h-[340px] object-cover rounded-3xl mb-8 shadow-2xl"
@@ -370,6 +389,21 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- About This Project -->
+    <div class="mb-4">
+      <div class="glass rounded-2xl p-4">
+        <div class="flex items-start gap-x-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-solid fa-info-circle text-emerald-400"></i>
+          </div>
+          <div class="flex-1 text-sm">
+            <div class="font-semibold mb-1">About This Project</div>
+            <p class="text-slate-400">Connect your wallet on Arc Testnet, stake GROKX tokens to earn rewards, claim them anytime, and unstake whenever you want (0.1% tax on unstake only). This experimental dApp is built purely for learning, testing, and fun — no real value or financial risk.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -534,11 +568,12 @@
             <div>
               <span class="text-slate-400 block text-xs">TOKEN NAME</span>
               <div class="flex items-center gap-x-2">
-                <!-- Official logo -->
-                <img src="https://warm-orca-c322h.lighthouseweb3.xyz/ipfs/bafkreict4r2d5byc3svt2tcc2b6o2h3m6alrkjijos4hcmgvlarbyt4dxm" 
-                     class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-300/60" 
+                <!-- Official logo (grok-rider-logo.png) -->
+                <img src="grok-rider-logo.png" 
+                     class="logo-img w-5 h-5 rounded-full object-cover" 
                      alt="GROKX Logo" 
                      title="Official GROKX Logo"
+                     style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
                      onerror="this.style.display='none'">
                 <span class="font-semibold">GrokX Token</span>
               </div>
@@ -653,8 +688,8 @@
     const tokenAddress = "0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac";
     const stakingAddress = "0x8baC14C3E600eDE41A31582A28d86a2430D49e97";
 
-    // Official GROKX Logo (Lighthouse Web3 public gateway - stable URL)
-    const TOKEN_LOGO_URL = 'https://warm-orca-c322h.lighthouseweb3.xyz/ipfs/bafkreict4r2d5byc3svt2tcc2b6o2h3m6alrkjijos4hcmgvlarbyt4dxm';
+    // Official GROKX Logo (grok-rider-logo.png)
+    const TOKEN_LOGO_URL = 'grok-rider-logo.png';
 
     // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
     const PUBLIC_RPC = "https://rpc-test-1.archiechain.io";
@@ -1194,7 +1229,7 @@
       }
 
       try {
-        // Using the official public logo URL for token metadata in MetaMask
+        // Using the local logo asset (grok-rider-logo.png) for token metadata in MetaMask
         const imageUrl = TOKEN_LOGO_URL;
 
         console.log('[MetaMask] Adding GROKX token with metadata:', {
@@ -1219,7 +1254,7 @@
 
         if (wasAdded) {
           showToast("GROKX successfully added to MetaMask!");
-          console.log('[MetaMask] Token added successfully with official IPFS logo.');
+          console.log('[MetaMask] Token added successfully with grok-rider-logo.png logo.');
         } else {
           console.log('[MetaMask] User cancelled or token already exists.');
         }
