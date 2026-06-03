@@ -697,6 +697,19 @@
     // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
     const PUBLIC_RPC = "https://rpc-test-1.archiechain.io";
 
+    // Arc Testnet config - standard params for wallet_addEthereumChain / switch
+    const ARC_TESTNET = {
+      chainId: '0x4dc',
+      chainName: 'Arc Testnet',
+      nativeCurrency: {
+        name: 'ARC',
+        symbol: 'ARC',
+        decimals: 18,
+      },
+      rpcUrls: ['https://rpc.testnet.arc.network'],
+      blockExplorerUrls: ['https://testnet.arcscan.app'],
+    };
+
     // Default reward rate from the contract (used for instant display before network fetch)
     const DEFAULT_REWARD_RATE = 2;
 
@@ -1107,12 +1120,10 @@
     async function switchToArcTestnet() {
       if (!window.ethereum) return;
 
-      const arcChainId = "0x4dc"; // 1244 in hex
-
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: arcChainId }],
+          params: [{ chainId: ARC_TESTNET.chainId }],
         });
       } catch (switchError) {
         // Chain not added, try to add it
@@ -1120,17 +1131,7 @@
           try {
             await window.ethereum.request({
               method: "wallet_addEthereumChain",
-              params: [{
-                chainId: arcChainId,
-                chainName: "Arc Testnet",
-                nativeCurrency: {
-                  name: "ARC",
-                  symbol: "ARC",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://rpc.testnet.arc.network"],
-                blockExplorerUrls: ["https://testnet.arcscan.app"],
-              }],
+              params: [ARC_TESTNET],
             });
           } catch (addError) {
             showToast("Failed to add Arc Testnet to your wallet.", "error");
@@ -1281,25 +1282,36 @@
       try {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0x4dc',
-            chainName: 'Arc Testnet',
-            nativeCurrency: {
-              name: 'ARC',
-              symbol: 'ARC',
-              decimals: 18,
-            },
-            rpcUrls: ['https://rpc.testnet.arc.network'],
-            blockExplorerUrls: ['https://testnet.arcscan.app'],
-          }],
+          params: [ARC_TESTNET],
         });
-        showToast("Arc Testnet added to MetaMask!");
+
+        // Auto-switch after adding (standard UX to avoid extra "wrong network" warnings)
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: ARC_TESTNET.chainId }],
+          });
+          showToast("Arc Testnet added and switched!");
+          setTimeout(() => window.location.reload(), 300);
+        } catch (switchErr) {
+          showToast("Arc Testnet added to MetaMask! Please switch networks manually.");
+        }
       } catch (error) {
         console.error("Failed to add Arc Testnet:", error);
         if (error.code === 4001) {
           showToast("Request rejected by user.", "error");
         } else if (error.message?.includes('already exists')) {
-          showToast("Arc Testnet is already added to your MetaMask.", "info");
+          // Already added - try to switch to it to reduce network warnings
+          try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: ARC_TESTNET.chainId }],
+            });
+            showToast("Switched to Arc Testnet!");
+            setTimeout(() => window.location.reload(), 300);
+          } catch (switchErr) {
+            showToast("Arc Testnet is already added to your MetaMask.", "info");
+          }
         } else {
           showToast("Failed to add Arc Testnet to MetaMask.", "error");
         }
