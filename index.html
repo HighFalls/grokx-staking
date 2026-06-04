@@ -636,6 +636,13 @@
           <span>Add Arc Testnet</span>
         </button>
 
+        <a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer"
+           class="hidden sm:inline-flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 hover:bg-cyan-500/15 hover:border-cyan-400/40 transition-all"
+           title="Need test tokens for gas? Get test ARC &amp; USDC">
+          <i class="fa-solid fa-droplet text-[8px]"></i>
+          <span>Faucet</span>
+        </a>
+
         <!-- Theme Toggle -->
         <button id="themeToggle"
                 class="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all"
@@ -1053,36 +1060,34 @@
       renderTransactions();
     }
 
+    function getTransactionsStorageKey() {
+      if (!userAddress) return null;
+      return `grokx_transactions_${userAddress.toLowerCase()}`;
+    }
+
     function saveTransactions() {
+      const key = getTransactionsStorageKey();
+      if (!key) return;
       try {
-        localStorage.setItem('grokx_transactions', JSON.stringify(transactions));
+        localStorage.setItem(key, JSON.stringify(transactions));
       } catch (e) {}
     }
 
-    function loadTransactions() {
+    function loadTransactionsForWallet() {
+      const key = getTransactionsStorageKey();
+      if (!key) {
+        transactions = [];
+        return;
+      }
       try {
-        const saved = localStorage.getItem('grokx_transactions');
+        const saved = localStorage.getItem(key);
         if (saved) {
           transactions = JSON.parse(saved).map(tx => ({
             ...tx,
             wallet: tx.wallet || tx.from || ''
           }));
         } else {
-          // Seed a realistic recent transaction to reflect actual on-chain activity
-          // (this will be replaced by real event data in future updates)
-          const now = Date.now();
-          transactions = [
-            {
-              id: now - 240000,
-              type: 'Claim',
-              amount: 0.046,
-              timestamp: new Date(now - 1000 * 60 * 4).toISOString(), // ~4 minutes ago
-              status: 'Success',
-              wallet: '0x6Be2a3c1f2e4d5b6a7c8d9e0f1a2b3c4d5e6f7a8'
-            }
-          ];
-          // Persist the seeded entry so it doesn't reappear after clearing
-          saveTransactions();
+          transactions = [];
         }
       } catch (e) {
         transactions = [];
@@ -1149,9 +1154,15 @@
     }
 
     function clearTransactions() {
+      if (!userAddress) {
+        transactions = [];
+        renderTransactions();
+        return;
+      }
       if (confirm('Clear all transaction history?')) {
         transactions = [];
-        localStorage.removeItem('grokx_transactions');
+        const key = getTransactionsStorageKey();
+        if (key) localStorage.removeItem(key);
         renderTransactions();
       }
     }
@@ -1405,7 +1416,9 @@
       // Update Add to MetaMask button visibility after connecting
       updateAddToMetaMaskButton();
 
-      // Pull real on-chain transaction history (if events are available)
+      // Load this wallet's activity, then sync on-chain history
+      loadTransactionsForWallet();
+      renderTransactions();
       syncOnChainTransactionHistory();
 
       if (refreshTimer) clearInterval(refreshTimer);
@@ -1661,8 +1674,8 @@
       // Initialize theme toggle
       initTheme();
 
-      // Load and render transactions
-      loadTransactions();
+      // Activity: empty until wallet connects
+      transactions = [];
       renderTransactions();
 
       // Show "Add to MetaMask" button only on Arc Testnet
