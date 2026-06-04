@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GrokX - Stake GROKX on Arc Testnet</title>
+  <meta name="description" content="Stake GROKX on Arc Testnet — earn rewards, claim anytime, and explore the GrokX protocol in a premium testnet demo. No real value.">
+  <title>GrokX — Stake GROKX on Arc Testnet</title>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
     
     :root {
       /* Dark Mode (Default - Cyberpunk) */
@@ -38,11 +39,93 @@
       --warning-text: #92400e;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', system_ui, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    /* Ambient cyberpunk nebula backdrop */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(103, 232, 249, 0.06), transparent 50%),
+        radial-gradient(ellipse 50% 35% at 0% 80%, rgba(124, 58, 237, 0.08), transparent 45%);
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 30%, rgba(167, 139, 250, 0.15), transparent 50%);
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Elegant full-width testnet strip */
+    .testnet-strip {
+      background: linear-gradient(90deg, rgba(124, 58, 237, 0.12), rgba(103, 232, 249, 0.08), rgba(124, 58, 237, 0.12));
+      border-bottom: 1px solid rgba(124, 58, 237, 0.25);
+    }
+
+    [data-theme="light"] .testnet-strip {
+      background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), rgba(167, 139, 250, 0.12), rgba(124, 58, 237, 0.08));
+      border-bottom-color: rgba(124, 58, 237, 0.15);
+    }
+
+    .testnet-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      background: rgba(124, 58, 237, 0.25);
+      border: 1px solid rgba(167, 139, 250, 0.45);
+      color: #c4b5fd;
+      flex-shrink: 0;
+    }
+
+    [data-theme="light"] .testnet-pill {
+      background: rgba(124, 58, 237, 0.15);
+      color: #6d28d9;
+      border-color: rgba(124, 58, 237, 0.35);
+    }
+
+    .section-heading {
+      font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .explorer-link {
+      color: #34d399;
+      transition: color 0.2s ease;
+    }
+
+    .explorer-link:hover {
+      color: #6ee7b7;
+      text-decoration: underline;
+    }
+
+    [data-theme="light"] .explorer-link {
+      color: #059669;
+    }
+
+    [data-theme="light"] .explorer-link:hover {
+      color: #047857;
     }
 
     /* Base text and background respect theme */
@@ -74,11 +157,45 @@
     }
 
     .stat-card {
-      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.25s ease;
     }
     
     .stat-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(124, 58, 237, 0.15);
+    }
+
+    [data-theme="light"] .stat-card:hover {
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+    }
+
+    .action-btn {
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .action-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Mobile: horizontal scroll for transaction table */
+    .table-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 640px) {
+      .hide-mobile-col {
+        display: none;
+      }
     }
 
     .crypto-input {
@@ -264,28 +381,248 @@
     [data-theme="light"] .glass .font-semibold.text-lg {
       color: var(--text) !important;
     }
+
+    [data-theme="light"] .testnet-strip p {
+      color: var(--text-secondary) !important;
+    }
+
+    [data-theme="light"] .testnet-strip .text-violet-300 {
+      color: #6d28d9 !important;
+    }
+
+    [data-theme="light"] footer {
+      border-color: rgba(124, 58, 237, 0.12);
+    }
+
+    /* Balanced vertical rhythm between sections */
+    .section-block {
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .section-block {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .section-block > h2,
+    .section-block > .section-heading {
+      margin-bottom: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .section-block > h2,
+      .section-block > .section-heading {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .section-heading {
+      font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 640px) {
+      .section-heading {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Comfortable card padding */
+    .panel {
+      padding: 1rem 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .panel {
+        padding: 1.25rem 1.5rem;
+      }
+    }
+
+    /* Full-width hero banner (banner0.png) */
+    .hero-banner-wrap {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero-banner-wrap {
+        margin-bottom: 1.75rem;
+      }
+    }
+
+    .hero-banner-img {
+      display: block;
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;
+      box-shadow:
+        0 20px 50px rgba(124, 58, 237, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    @media (min-width: 640px) {
+      .hero-banner-img {
+        max-height: 280px;
+        border-radius: 1.25rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-banner-img {
+        max-height: 320px;
+        border-radius: 1.5rem;
+      }
+    }
+
+    /* Tighter horizontal gutters sitewide */
+    .content-shell {
+      max-width: 64rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .content-shell {
+        padding-left: 0.625rem;
+        padding-right: 0.625rem;
+      }
+    }
+
+    /* Hero: balanced two-column layout, minimal column gap */
+    .hero-split {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0.25rem;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-split {
+        gap: 0.375rem;
+      }
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .hero-nebula-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hero-nebula {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: clamp(2.25rem, 7vw, 5rem);
+      aspect-ratio: 2.65 / 1;
+      max-height: min(16rem, 48vw);
+    }
+
+    @media (min-width: 640px) {
+      .hero-nebula {
+        aspect-ratio: 2.45 / 1;
+        max-height: min(18rem, 42vw);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-nebula {
+        aspect-ratio: 2.35 / 1;
+        max-height: min(20rem, 32vh);
+        width: 100%;
+        margin: 0;
+      }
+    }
+
+    .hero-nebula canvas {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-nebula-glow {
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .page-main {
+      padding-top: 1.25rem;
+      padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .page-main {
+        padding-top: 1.5rem;
+        padding-bottom: 4rem;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-200 min-h-screen">
+<body class="bg-slate-950 text-slate-200 min-h-screen page-shell">
+  <header class="sticky top-0 z-50">
+  <!-- Testnet demo notice (top strip) -->
+  <div class="testnet-strip" role="status" aria-live="polite">
+    <div class="content-shell py-2 sm:py-2.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center sm:text-left">
+      <span class="testnet-pill">TESTNET DEMO</span>
+      <p class="text-xs sm:text-sm text-slate-300 leading-snug max-w-2xl">
+        <span class="text-violet-300 font-medium">GrokX</span> runs on Arc Testnet only — tokens and rewards are for demonstration and have <strong class="text-slate-200 font-semibold">no real monetary value</strong>.
+      </p>
+      <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer"
+         class="hidden sm:inline-flex items-center gap-x-1 text-xs text-cyan-400/90 hover:text-cyan-300 transition-colors">
+        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        Arc Explorer
+      </a>
+    </div>
+  </div>
+
   <!-- Navigation -->
-  <nav class="border-b border-white/10 bg-slate-950/80 backdrop-blur-lg sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-x-3">
-        <div class="logo-glow">
-          <!-- Official GROKX Logo (grokx-logo.png) -->
+  <nav class="border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
+    <div class="content-shell py-2.5 sm:py-3 flex items-center justify-between gap-3">
+      <a href="#" class="flex items-center gap-x-2.5 sm:gap-x-3 min-w-0 shrink">
+        <div class="logo-glow shrink-0">
           <img src="grokx-logo.png" 
                alt="GrokX" 
-               class="logo-img w-14 h-14 rounded-full object-cover"
+               class="logo-img w-11 h-11 sm:w-14 sm:h-14 rounded-full object-cover"
                title="Official GROKX Logo"
                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
         </div>
-        <div>
-          <span class="font-display text-2xl font-semibold tracking-tighter">GrokX</span>
+        <div class="min-w-0">
+          <span class="font-display text-xl sm:text-2xl font-semibold tracking-tighter block truncate">GrokX</span>
+          <span class="hidden sm:block text-[10px] text-slate-500 tracking-wide">Staking on Arc</span>
         </div>
-      </div>
+      </a>
 
-      <div class="flex items-center gap-x-3">
-        <div class="hidden sm:flex items-center gap-x-2 px-3 py-1.5 rounded-full bg-white/5 text-sm">
+      <div class="flex items-center gap-x-1.5 sm:gap-x-3 shrink-0">
+        <div class="hidden sm:flex items-center gap-x-2 px-3 py-1.5 rounded-full bg-white/5 text-sm border border-white/5">
           <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
           <span class="text-slate-300">Arc Testnet</span>
         </div>
@@ -322,366 +659,271 @@
 
         <button id="walletBtn"
                 onclick="handleWalletClick()"
-                class="flex items-center gap-x-2 px-4 py-2 rounded-full bg-white text-slate-900 hover:bg-white/90 font-semibold text-sm transition-all">
-          <i class="fa-solid fa-wallet mr-1"></i>
-          <span id="walletText">Connect Wallet</span>
+                class="flex items-center gap-x-1.5 sm:gap-x-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 text-white hover:from-violet-400 hover:to-indigo-400 font-semibold text-xs sm:text-sm transition-all shadow-lg shadow-violet-500/20">
+          <i class="fa-solid fa-wallet text-sm"></i>
+          <span id="walletText">Connect</span>
         </button>
       </div>
     </div>
   </nav>
+  </header>
 
-  <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
+  <main class="page-main content-shell">
 
-    <!-- Testnet Demo Notice -->
-    <div class="mb-6 glass rounded-2xl p-4 border border-emerald-500/30 bg-emerald-500/5">
-      <div class="flex gap-x-3">
-        <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <i class="fa-solid fa-info-circle text-emerald-400"></i>
-        </div>
-        <div class="text-sm leading-snug">
-          <div class="font-semibold text-emerald-400">This is a Testnet Demo Project</div>
-          <p class="text-slate-400 mt-0.5">GrokX is a fun experimental staking dApp built for learning and testing on Arc Testnet. All tokens have no real value.</p>
-        </div>
-      </div>
+    <!-- Hero banner (banner0.png) -->
+    <div class="hero-banner-wrap">
+      <img src="banner0.png" alt="GrokX — stake GROKX on Arc Testnet" 
+           class="hero-banner-img"
+           style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
     </div>
 
-    <!-- Wide Banner -->
-    <img src="banner0.png" alt="GrokX Banner" 
-         class="w-full max-h-[340px] object-cover rounded-3xl mb-8 shadow-2xl"
-         style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-
-    <!-- Header -->
-    <div class="mb-8">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+    <!-- Hero -->
+    <header class="section-block">
+      <div class="hero-split">
         
-        <!-- Text Content -->
-        <div class="flex-1 max-w-lg">
-          <div class="flex items-center gap-x-3 mb-2">
-            <h1 class="font-display text-4xl font-semibold tracking-tighter">Stake GROKX</h1>
-            <div class="px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500/10 to-violet-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold flex items-center gap-x-1">
-              <i class="fa-solid fa-lock text-xs"></i>
-              <span>SECURED</span>
+        <div class="hero-copy flex-1 min-w-0 lg:max-w-none max-w-xl">
+          <p class="text-xs font-semibold tracking-widest text-violet-400/90 uppercase mb-2">Arc Testnet · GROKX Staking</p>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-3">
+            <h1 class="font-display text-3xl sm:text-4xl lg:text-[2.65rem] font-semibold tracking-tighter leading-tight">Stake GROKX,<br class="sm:hidden"> earn rewards</h1>
+            <div class="px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/15 to-cyan-500/10 border border-violet-500/25 text-violet-300 text-xs font-semibold flex items-center gap-x-1.5">
+              <i class="fa-solid fa-shield-halved text-[10px]"></i>
+              <span>ON-CHAIN</span>
             </div>
           </div>
 
-          <p class="text-slate-400 max-w-md">Earn passive rewards by staking your GrokX tokens. Flexible unstaking with real-time reward accrual.</p>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-lg">
+            Put your GROKX to work on Arc Testnet. Rewards accrue in real time — stake, claim, or unstake on your schedule with full transparency via verified smart contracts.
+          </p>
           
-          <div class="mt-3 flex flex-wrap items-center gap-2">
-            <div class="inline-flex items-center gap-x-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 text-xs text-emerald-400">
-              <i class="fa-solid fa-check-circle"></i>
+          <div class="mt-4 flex flex-wrap items-center gap-2.5">
+            <div class="inline-flex items-center gap-x-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs text-emerald-400 font-medium">
+              <i class="fa-solid fa-circle text-[6px] animate-pulse"></i>
               <span>Live on Arc Testnet</span>
             </div>
             
             <a href="https://app.synthra.org/#/pools/238266" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-x-2 rounded-xl bg-violet-500/10 border border-violet-500/30 hover:bg-violet-500/20 hover:shadow-[0_0_10px_rgba(167,139,250,0.45)] px-3 py-1 text-xs text-violet-400 font-medium transition-all">
-              <i class="fa-solid fa-exchange-alt"></i>
-              <span>Trade GROKX</span>
+               class="inline-flex items-center gap-x-2 rounded-xl bg-violet-500/10 border border-violet-500/30 hover:bg-violet-500/20 hover:shadow-[0_0_12px_rgba(167,139,250,0.4)] px-3 py-1.5 text-xs text-violet-300 font-medium transition-all">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+              <span>Trade on Synthra</span>
             </a>
           </div>
-          <div class="mt-1 text-[10px] text-slate-500">Liquidity available on Synthra DEX</div>
         </div>
 
-        <!-- Grok Nebula Animation - Large & Immersive -->
-        <div class="hidden md:flex flex-shrink-0 items-center justify-center">
-          <div class="grok-nebula w-[480px] h-[165px] relative rounded-[5.5rem] overflow-hidden border border-white/10">
+        <!-- Grok Nebula Animation -->
+        <div class="hero-nebula-shell">
+          <div class="grok-nebula hero-nebula border border-white/10">
             <canvas id="grokNebula" class="absolute inset-0 w-full h-full"></canvas>
-            
-            <!-- Horizontal nebula glow overlay -->
-            <div class="absolute inset-0 rounded-[5.5rem] 
-                        bg-[radial-gradient(ellipse_at_50%_50%,rgba(124,58,237,0.22)_0%,rgba(15,23,42,0.25)_55%,transparent_82%)]"></div>
+            <div class="hero-nebula-glow absolute inset-0 
+                        bg-[radial-gradient(ellipse_at_50%_50%,rgba(124,58,237,0.28)_0%,rgba(15,23,42,0.3)_50%,transparent_78%)]"></div>
           </div>
         </div>
 
       </div>
-    </div>
+    </header>
 
-    <!-- About This Project -->
-    <div class="mb-4">
-      <div class="glass rounded-2xl p-4">
-        <div class="flex items-start gap-x-3">
-          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <i class="fa-solid fa-info-circle text-emerald-400"></i>
-          </div>
-          <div class="flex-1 text-sm">
-            <div class="font-semibold mb-1">About This Project</div>
-            <p class="text-slate-400">Connect your wallet on Arc Testnet, stake GROKX tokens to earn rewards, claim them anytime, and unstake whenever you want (0.1% tax on unstake only). This experimental dApp is built purely for learning, testing, and fun — no real value or financial risk.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- How It Works -->
-    <div class="mb-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-        <div class="glass rounded-2xl p-4">
-          <div class="flex items-center gap-x-2 mb-1.5">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+    <!-- How It Works (cards only) -->
+    <section class="section-block">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="flex items-center gap-x-2.5 mb-2">
+            <div class="w-9 h-9 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-300">
               <i class="fa-solid fa-wallet"></i>
             </div>
-            <span class="font-semibold">1. Connect Wallet</span>
+            <span class="font-semibold">1. Connect</span>
           </div>
-          <p class="text-sm text-slate-400">Connect your wallet on Arc Testnet to start interacting with the protocol.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc Testnet (Chain ID 1244). Add the network in one click from the header.</p>
         </div>
-        <div class="glass rounded-2xl p-4">
-          <div class="flex items-center gap-x-2 mb-1.5">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <i class="fa-solid fa-lock"></i>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="flex items-center gap-x-2.5 mb-2">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <i class="fa-solid fa-arrow-down"></i>
             </div>
-            <span class="font-semibold">2. Stake Tokens</span>
+            <span class="font-semibold">2. Stake</span>
           </div>
-          <p class="text-sm text-slate-400">Deposit your GROKX tokens. Your stake is tracked directly on the contract.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Approve and deposit GROKX. Your position is recorded immutably on the staking contract.</p>
         </div>
-        <div class="glass rounded-2xl p-4">
-          <div class="flex items-center gap-x-2 mb-1.5">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <i class="fa-solid fa-coins"></i>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="flex items-center gap-x-2.5 mb-2">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
-            <span class="font-semibold">3. Earn Rewards</span>
+            <span class="font-semibold">3. Earn</span>
           </div>
-          <p class="text-sm text-slate-400">Rewards accrue automatically based on the current reward rate. Check your pending rewards anytime.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Rewards scale with your stake and the protocol reward rate — visible in your dashboard and APY estimate.</p>
         </div>
-        <div class="glass rounded-2xl p-4">
-          <div class="flex items-center gap-x-2 mb-1.5">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <i class="fa-solid fa-hand-holding-usd"></i>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="flex items-center gap-x-2.5 mb-2">
+            <div class="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400">
+              <i class="fa-solid fa-gift"></i>
             </div>
-            <span class="font-semibold">4. Claim & Unstake</span>
+            <span class="font-semibold">4. Claim</span>
           </div>
-          <p class="text-sm text-slate-400">Claim rewards or unstake your tokens at any time. A 0.1% tax applies only on unstaking and is sent to the staking contract to fund future incentives.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Claim rewards anytime. Unstaking applies a 0.1% fee (testnet only) recycled into future reward funding.</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Stats + Reward Info -->
-    <div class="mb-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass rounded-2xl p-5">
-          <div class="text-xs text-slate-500 mb-1">YOUR BALANCE</div>
-          <div id="balance" class="text-3xl font-semibold tracking-tighter">—</div>
+    <!-- Stats -->
+    <section class="section-block">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="text-[10px] sm:text-xs text-slate-500 mb-1.5 font-medium tracking-wide">WALLET BALANCE</div>
+          <div id="balance" class="text-xl sm:text-3xl font-semibold tracking-tighter break-words">—</div>
         </div>
         
-        <div class="glass rounded-2xl p-5">
-          <div class="text-xs text-slate-500 mb-1">CURRENTLY STAKED</div>
-          <div id="stakedBalance" class="text-3xl font-semibold tracking-tighter">—</div>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="text-[10px] sm:text-xs text-slate-500 mb-1.5 font-medium tracking-wide">STAKED</div>
+          <div id="stakedBalance" class="text-xl sm:text-3xl font-semibold tracking-tighter break-words">—</div>
         </div>
         
-        <div class="glass rounded-2xl p-5">
-          <div class="text-xs text-slate-500 mb-1">PENDING REWARDS</div>
-          <div id="rewards" class="text-3xl font-semibold tracking-tighter text-emerald-400">—</div>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="text-[10px] sm:text-xs text-slate-500 mb-1.5 font-medium tracking-wide">PENDING REWARDS</div>
+          <div id="rewards" class="text-xl sm:text-3xl font-semibold tracking-tighter text-emerald-400 break-words">—</div>
         </div>
         
-        <div class="glass rounded-2xl p-5">
-          <div class="text-xs text-slate-500 mb-1">APY</div>
-          <div id="apy" class="text-3xl font-semibold tracking-tighter text-amber-400">—</div>
+        <div class="glass panel stat-card rounded-2xl">
+          <div class="text-[10px] sm:text-xs text-slate-500 mb-1.5 font-medium tracking-wide">EST. APY</div>
+          <div id="apy" class="text-xl sm:text-3xl font-semibold tracking-tighter text-amber-400">—</div>
         </div>
       </div>
 
-      <!-- Reward Rate -->
-      <div class="mt-4 glass rounded-2xl px-5 py-3 flex items-center justify-between text-sm">
+      <div class="mt-4 glass panel rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
         <div>
-          <span class="text-slate-400">Reward Rate:</span>
-          <span id="rewardRate" class="font-semibold ml-2">2</span>
-          <span class="text-xs text-slate-500 ml-1">per 1000 staked / day</span>
+          <span class="text-slate-400">Protocol reward rate</span>
+          <span id="rewardRate" class="font-semibold ml-2 text-violet-300">2</span>
+          <span class="text-xs text-slate-500 ml-1">GROKX per 1,000 staked / day</span>
         </div>
-        <div id="noStakeHint" class="text-amber-400 text-xs hidden">
-          Stake tokens to see your APY
+        <div id="noStakeHint" class="text-amber-400/90 text-xs hidden">
+          <i class="fa-solid fa-lightbulb mr-1"></i>Stake GROKX to calculate your personal APY
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Actions -->
-    <div class="grid md:grid-cols-2 gap-5 mb-6">
+    <!-- Stake & Unstake -->
+    <section class="section-block">
+      <div class="grid md:grid-cols-2 gap-4 sm:gap-5">
       
-      <!-- Stake -->
-      <div class="glass rounded-3xl p-6">
-        <div class="flex items-center gap-x-2 mb-4">
+      <div class="glass panel rounded-2xl">
+        <div class="flex items-center gap-x-2 mb-1">
           <i class="fa-solid fa-arrow-down text-emerald-400"></i>
-          <span class="font-semibold text-lg">Stake</span>
+          <span class="font-semibold text-lg">Stake GROKX</span>
         </div>
+        <p class="text-xs text-slate-500 mb-4">Deposit tokens into the staking contract</p>
 
-        <div class="relative mb-3">
+        <div class="relative mb-4">
           <input type="text" inputmode="decimal" id="stakeAmount" 
-                 class="crypto-input w-full bg-slate-900 border border-white/10 focus:border-emerald-500 rounded-2xl px-5 py-4 pr-16 outline-none"
-                 placeholder="0.00">
-          <button onclick="setMaxStake()" 
+                 class="crypto-input w-full bg-slate-900 border border-white/10 focus:border-emerald-500 rounded-2xl px-4 sm:px-5 py-3.5 sm:py-4 pr-16 outline-none"
+                 placeholder="0.00" aria-label="Stake amount">
+          <button type="button" onclick="setMaxStake()" 
                   class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1 text-xs font-bold rounded-xl bg-white/10 hover:bg-white/15 active:bg-white/20">
             MAX
           </button>
         </div>
 
         <button id="stakeBtn" onclick="stakeTokens()"
-                class="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl transition-all">
+                class="action-btn w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl">
           <span id="stakeBtnText">Stake Tokens</span>
         </button>
       </div>
 
-      <!-- Unstake -->
-      <div class="glass rounded-3xl p-6">
-        <div class="flex items-center gap-x-2 mb-4">
+      <div class="glass panel rounded-2xl">
+        <div class="flex items-center gap-x-2 mb-1">
           <i class="fa-solid fa-arrow-up text-orange-400"></i>
-          <span class="font-semibold text-lg">Unstake</span>
+          <span class="font-semibold text-lg">Unstake GROKX</span>
         </div>
+        <p class="text-xs text-slate-500 mb-4">Withdraw stake · 0.1% fee applies (testnet)</p>
 
-        <div class="relative mb-3">
+        <div class="relative mb-4">
           <input type="text" inputmode="decimal" id="unstakeAmount" 
-                 class="crypto-input w-full bg-slate-900 border border-white/10 focus:border-orange-500 rounded-2xl px-5 py-4 pr-16 outline-none"
-                 placeholder="0.00">
-          <button onclick="setMaxUnstake()" 
+                 class="crypto-input w-full bg-slate-900 border border-white/10 focus:border-orange-500 rounded-2xl px-4 sm:px-5 py-3.5 sm:py-4 pr-16 outline-none"
+                 placeholder="0.00" aria-label="Unstake amount">
+          <button type="button" onclick="setMaxUnstake()" 
                   class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1 text-xs font-bold rounded-xl bg-white/10 hover:bg-white/15 active:bg-white/20">
             MAX
           </button>
         </div>
 
         <button id="unstakeBtn" onclick="unstakeTokens()"
-                class="w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold py-3.5 rounded-2xl transition-all">
+                class="action-btn w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold py-3.5 rounded-2xl">
           <span id="unstakeBtnText">Unstake Tokens</span>
         </button>
       </div>
-    </div>
+      </div>
+    </section>
 
     <!-- Rewards -->
-    <div class="glass rounded-3xl p-6 mb-8">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <section class="section-block">
+      <div class="glass panel rounded-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
         <div>
           <div class="flex items-center gap-x-2">
             <i class="fa-solid fa-gift text-violet-400"></i>
-            <span class="font-semibold text-lg">Rewards</span>
+            <span class="font-semibold text-lg">Claim rewards</span>
           </div>
-          <div class="text-sm text-slate-400 mt-1">Claim your accumulated rewards anytime.</div>
+          <p class="text-sm text-slate-400 mt-1.5 max-w-md leading-relaxed">Harvest accrued GROKX whenever you like — no minimum claim and no cooldown on testnet.</p>
         </div>
         
-        <div class="flex flex-col items-end gap-y-1">
-          <div class="text-right">
-            <div class="text-xs text-slate-400">CLAIMABLE</div>
-            <div id="claimableAmount" class="font-semibold text-lg text-emerald-400">—</div>
+        <div class="flex flex-col sm:items-end gap-y-3 w-full sm:w-auto">
+          <div class="sm:text-right">
+            <div class="text-xs text-slate-500 uppercase tracking-wide">Claimable now</div>
+            <div id="claimableAmount" class="font-semibold text-xl sm:text-2xl text-emerald-400 mt-0.5">—</div>
           </div>
           <button id="claimBtn" onclick="claimRewards()"
-                  class="px-8 py-3 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white font-semibold rounded-2xl transition-all">
+                  class="action-btn w-full sm:w-auto px-8 py-3.5 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white font-semibold rounded-2xl">
             <span id="claimBtnText">Claim Rewards</span>
           </button>
         </div>
       </div>
-    </div>
-
-    <!-- About GROKX -->
-    <div class="mb-4">
-      <div class="glass rounded-2xl p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm">
-          <div class="space-y-3">
-            <div>
-              <span class="text-slate-400 block text-xs">TOKEN NAME</span>
-              <div class="flex items-center gap-x-2">
-                <!-- Official logo (grokx-logo.png) -->
-                <img src="grokx-logo.png" 
-                     class="logo-img w-5 h-5 rounded-full object-cover" 
-                     alt="GROKX Logo" 
-                     title="Official GROKX Logo"
-                     style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
-                     onerror="this.style.display='none'">
-                <span class="font-semibold">GrokX Token</span>
-              </div>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-xs">SYMBOL</span>
-              <span class="font-mono font-semibold">GROKX</span>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-xs">MAX SUPPLY</span>
-              <span class="font-semibold">50,000,000 GROKX</span>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-xs">TAX RATE</span>
-              <span class="font-semibold">0.1% on unstaking only (sent to staking contract)</span>
-            </div>
-          </div>
-          <div class="space-y-3">
-            <div>
-              <span class="text-slate-400 block text-xs">TOKEN CONTRACT</span>
-              <a href="https://testnet.arcscan.app/address/0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac" target="_blank" 
-                 class="font-mono text-emerald-400 hover:underline break-all text-xs">
-                0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac
-              </a>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-xs">STAKING CONTRACT</span>
-              <a href="https://testnet.arcscan.app/address/0x8baC14C3E600eDE41A31582A28d86a2430D49e97" target="_blank" 
-                 class="font-mono text-emerald-400 hover:underline break-all text-xs">
-                0x8baC14C3E600eDE41A31582A28d86a2430D49e97
-              </a>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-xs">LIQUIDITY POOL</span>
-              <a href="https://app.synthra.org/#/pools/238266" target="_blank" rel="noopener noreferrer"
-                 class="font-semibold text-emerald-400 hover:underline text-xs flex items-center gap-x-1">
-                USDC / GROKX on Synthra (Arc Testnet)
-                <i class="fa-solid fa-external-link-alt text-[9px] opacity-70"></i>
-              </a>
-            </div>
-            <div class="pt-1">
-              <span class="text-emerald-400 text-xs font-medium">✓ Verified on Arc Testnet Explorer</span>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-
-    <!-- Official Contract Addresses -->
-    <div class="glass rounded-2xl p-5">
-      <div class="flex items-center gap-x-2 mb-3">
-        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-        <span class="font-semibold text-sm">Official Contract Addresses</span>
-      </div>
-      
-      <div class="space-y-2 text-xs">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-1">
-          <span class="text-slate-400 w-16">Token:</span>
-          <span class="font-mono break-all">0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac</span>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center gap-1">
-          <span class="text-slate-400 w-16">Staking:</span>
-          <span class="font-mono break-all">0x8baC14C3E600eDE41A31582A28d86a2430D49e97</span>
-        </div>
-      </div>
-
-      <div class="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs">
-        <strong>Important:</strong> Only interact with the contract addresses shown above. 
-        Always verify these addresses before approving transactions or sending tokens.
-      </div>
-    </div>
+    </section>
 
     <!-- Recent Transactions -->
-    <div class="mb-8">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-semibold flex items-center gap-x-2">
-          <i class="fa-solid fa-history text-violet-400"></i>
-          Recent Transactions
+    <section class="section-block">
+      <div class="flex items-center justify-between mb-4 gap-3">
+        <h2 class="section-heading flex items-center gap-x-2">
+          <i class="fa-solid fa-clock-rotate-left text-violet-400"></i>
+          Activity
         </h2>
-        <button onclick="clearTransactions()" 
-                class="text-xs text-slate-400 hover:text-slate-300 flex items-center gap-x-1">
-          <i class="fa-solid fa-trash"></i>
+        <button type="button" onclick="clearTransactions()" 
+                class="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-x-1 px-2 py-1 rounded-lg hover:bg-white/5 transition-colors">
+          <i class="fa-solid fa-trash-can"></i>
           <span>Clear</span>
         </button>
       </div>
       
       <div class="glass rounded-2xl overflow-hidden">
-        <div class="max-h-[320px] overflow-y-auto">
-          <table class="w-full text-sm">
-            <thead class="bg-white/5 text-left">
+        <div class="table-scroll max-h-[340px] overflow-y-auto overflow-x-auto">
+          <table class="w-full text-sm min-w-[480px]">
+            <thead class="bg-white/5 text-left sticky top-0 backdrop-blur-sm">
               <tr>
-                <th class="px-5 py-3 text-xs font-medium text-slate-400">TYPE</th>
-                <th class="px-5 py-3 text-xs font-medium text-slate-400">WALLET</th>
-                <th class="px-5 py-3 text-xs font-medium text-slate-400">AMOUNT</th>
-                <th class="px-5 py-3 text-xs font-medium text-slate-400">TIME</th>
-                <th class="px-5 py-3 text-xs font-medium text-slate-400 text-right">STATUS</th>
+                <th class="px-4 sm:px-5 py-3 text-xs font-medium text-slate-400">Type</th>
+                <th class="px-4 sm:px-5 py-3 text-xs font-medium text-slate-400 hide-mobile-col">Wallet</th>
+                <th class="px-4 sm:px-5 py-3 text-xs font-medium text-slate-400">Amount</th>
+                <th class="px-4 sm:px-5 py-3 text-xs font-medium text-slate-400">Time</th>
+                <th class="px-4 sm:px-5 py-3 text-xs font-medium text-slate-400 text-right">Status</th>
               </tr>
             </thead>
             <tbody id="transactionsTable" class="divide-y divide-white/10">
-              <!-- Populated by JavaScript -->
             </tbody>
           </table>
         </div>
       </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-white/10 py-8 mt-4">
+    <div class="content-shell flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-x-2">
+        <img src="grokx-logo.png" alt="" class="w-5 h-5 rounded-full opacity-80" aria-hidden="true">
+        <span>© 2026 GrokX · Testnet demo at <a href="https://grokx.space" class="text-violet-400 hover:text-violet-300">grokx.space</a></span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+        <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Arc Explorer</a>
+        <a href="https://app.synthra.org/#/pools/238266" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Synthra Pool</a>
+      </div>
     </div>
+  </footer>
 
   <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-y-2"></div>
@@ -690,6 +932,7 @@
     // ==================== CONFIG ====================
     const tokenAddress = "0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac";
     const stakingAddress = "0x8baC14C3E600eDE41A31582A28d86a2430D49e97";
+    const ARC_EXPLORER = "https://testnet.arcscan.app";
 
     // Official GROKX Logo (latest IPFS via retired-pony lighthouse for MetaMask token image; local grokx-logo.png used for on-page icons)
     const TOKEN_LOGO_URL = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
@@ -806,8 +1049,8 @@
                 <i class="fa-solid fa-clock-rotate-left text-xl opacity-60"></i>
                 <div>
                   <div class="text-sm font-medium text-slate-400">No transactions yet</div>
-                  <div class="text-xs mt-1 max-w-[260px] mx-auto leading-snug">
-                    Stake GROKX to start earning. Your on-chain activity (stakes, unstakes, and claims) will appear here.
+                  <div class="text-xs mt-1 max-w-[280px] mx-auto leading-snug">
+                    Connect your wallet and stake GROKX — stakes, claims, and unstakes will show up here.
                   </div>
                 </div>
               </div>
@@ -835,7 +1078,7 @@
                 <span class="font-medium">${tx.type}</span>
               </div>
             </td>
-            <td class="px-5 py-3 font-mono text-xs text-slate-400" title="${tx.wallet || tx.from || ''}">
+            <td class="px-5 py-3 font-mono text-xs text-slate-400 hide-mobile-col" title="${tx.wallet || tx.from || ''}">
               ${shortenAddress(tx.wallet || tx.from || '')}
             </td>
             <td class="px-5 py-3 font-mono text-sm">
@@ -1145,7 +1388,7 @@
     function disconnectWallet() {
       if (refreshTimer) clearInterval(refreshTimer);
       provider = signer = tokenContract = stakingContract = userAddress = null;
-      document.getElementById("walletText").innerHTML = "Connect Wallet";
+      document.getElementById("walletText").innerHTML = "Connect";
       location.reload();
     }
 
@@ -1389,66 +1632,92 @@
 
       const ctx = canvas.getContext('2d', { alpha: true });
       const container = canvas.parentElement;
+      const BASE_W = 480;
+      const BASE_H = 165;
+
+      let particles = [];
+      let time = 0;
+
+      function nebulaScale() {
+        const w = container.clientWidth || BASE_W;
+        const h = container.clientHeight || BASE_H;
+        // Uniform scale so effect stays centered and fills the container
+        const s = Math.min(w / BASE_W, h / BASE_H);
+        return {
+          s,
+          fill: Math.min(s, 1.85),
+          cx: w / 2,
+          cy: h / 2,
+          nebulaRX: 190 * s,
+          nebulaRY: 58 * s,
+        };
+      }
+
+      function buildParticles() {
+        const { s, fill } = nebulaScale();
+        const count = Math.min(320, Math.floor(185 * fill * fill));
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            angle: Math.random() * Math.PI * 2,
+            radiusX: (Math.random() * 175 + 35) * s,
+            radiusY: (Math.random() * 52 + 14) * s,
+            speed: (Math.random() * 0.009 + 0.0025) * (Math.random() > 0.5 ? 1 : -1),
+            size: (Math.random() * 2.1 + 0.85) * Math.max(0.9, fill * 0.85),
+            alpha: Math.random() * 0.7 + 0.32,
+            hue: Math.random() > 0.48 ? 270 : 195,
+          });
+        }
+      }
 
       function resize() {
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        buildParticles();
       }
+
       resize();
       window.addEventListener('resize', resize);
 
-      const particles = [];
-      const numParticles = 185;
-
-      // Create particles for wide horizontal nebula
-      for (let i = 0; i < numParticles; i++) {
-        particles.push({
-          angle: Math.random() * Math.PI * 2,
-          // Elliptical orbits - much wider horizontally
-          radiusX: Math.random() * 175 + 35,
-          radiusY: Math.random() * 52 + 14,
-          speed: (Math.random() * 0.009 + 0.0025) * (Math.random() > 0.5 ? 1 : -1),
-          size: Math.random() * 2.1 + 0.85,
-          alpha: Math.random() * 0.7 + 0.32,
-          hue: Math.random() > 0.48 ? 270 : 195   // mostly purple with some cyan
-        });
-      }
-
-      let time = 0;
-
       function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        ctx.clearRect(0, 0, w, h);
 
         const colors = getNebulaColors();
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
+        const { s, fill, cx, cy, nebulaRX, nebulaRY } = nebulaScale();
 
-        // Background
         ctx.fillStyle = colors.bg;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, w, h);
 
-        // Soft swirling nebula clouds (horizontal emphasis)
+        // Soft swirling nebula clouds
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(time * 0.012);
 
         for (let i = 0; i < 6; i++) {
           ctx.beginPath();
-          ctx.ellipse(0, 0, 175 + i * 22, 52 + i * 7, 0, 0, Math.PI * 2);
+          ctx.ellipse(0, 0, (175 + i * 22) * s, (52 + i * 7) * s, 0, 0, Math.PI * 2);
           const nebulaAlpha = 0.045 + i * 0.009;
-          ctx.fillStyle = i % 2 === 0 
-            ? colors.nebulaCloudPurple.replace('0.22', nebulaAlpha) 
+          ctx.fillStyle = i % 2 === 0
+            ? colors.nebulaCloudPurple.replace('0.22', nebulaAlpha)
             : colors.nebulaCloudCyan.replace('0.18', nebulaAlpha * 0.7);
           ctx.fill();
         }
         ctx.restore();
 
-        // Orbiting energy rings (elliptical)
+        // Orbiting energy rings
         ctx.strokeStyle = colors.ring;
-        ctx.lineWidth = 1.1;
+        ctx.lineWidth = Math.max(1, 1.1 * fill);
         for (let r = 0; r < 4; r++) {
-          const ringRadiusX = 95 + r * 32;
-          const ringRadiusY = 32 + r * 9;
+          const ringRadiusX = (95 + r * 32) * s;
+          const ringRadiusY = (32 + r * 9) * s;
           ctx.save();
           ctx.translate(cx, cy);
           ctx.rotate(time * (0.035 + r * 0.012) * (r % 2 === 0 ? 1 : -1));
@@ -1458,14 +1727,14 @@
           ctx.restore();
         }
 
-        // Glowing particles - wide elliptical orbits
+        // Glowing particles
         ctx.save();
         ctx.translate(cx, cy);
 
         for (let p of particles) {
           p.angle += p.speed;
 
-          const wobble = Math.sin(time * 0.7 + p.angle * 1.3) * 3.5;
+          const wobble = Math.sin(time * 0.7 + p.angle * 1.3) * (3.5 * s);
           const x = Math.cos(p.angle) * (p.radiusX + wobble);
           const y = Math.sin(p.angle) * (p.radiusY + wobble * 0.55);
 
@@ -1478,45 +1747,35 @@
           let particleAlpha = alpha;
           let glowAlpha = alpha * 0.4;
 
-          // In Light Mode: make particles much brighter when over the nebula
           if (document.documentElement.getAttribute('data-theme') === 'light') {
-            // Define the main nebula area for Light Mode visibility boost
-            const nebulaRX = 190;
-            const nebulaRY = 58;
-
-            // Check if particle is over the main nebula area (for Light Mode boost)
             const dx = x / nebulaRX;
             const dy = y / nebulaRY;
             const isOverNebula = (dx * dx + dy * dy) < 0.82;
 
             if (isOverNebula) {
-              // Bright white / light cyan when crossing the nebula background
-              particleColor = p.hue === 270 
-                ? 'rgba(255, 255, 255, 0.95)' 
+              particleColor = p.hue === 270
+                ? 'rgba(255, 255, 255, 0.95)'
                 : 'rgba(224, 242, 255, 0.95)';
-              glowColor = p.hue === 270 
-                ? 'rgba(167, 139, 250, 0.7)' 
+              glowColor = p.hue === 270
+                ? 'rgba(167, 139, 250, 0.7)'
                 : 'rgba(165, 243, 252, 0.7)';
               particleAlpha = Math.min(alpha * 1.35, 1.0);
               glowAlpha = Math.min(alpha * 0.75, 0.65);
               particleSize = p.size * 1.15;
               glowSize = p.size * 3.0;
             } else {
-              // Slightly brighter than normal even outside the nebula in Light Mode
               particleAlpha = Math.min(alpha * 1.15, 1.0);
               glowAlpha = Math.min(alpha * 0.55, 0.5);
               glowSize = p.size * 2.7;
             }
           }
 
-          // Draw particle
           ctx.fillStyle = particleColor;
           ctx.globalAlpha = particleAlpha;
           ctx.beginPath();
           ctx.arc(x, y, particleSize, 0, Math.PI * 2);
           ctx.fill();
 
-          // Soft outer glow
           ctx.fillStyle = glowColor;
           ctx.globalAlpha = glowAlpha;
           ctx.beginPath();
@@ -1524,32 +1783,33 @@
           ctx.fill();
         }
         ctx.restore();
+        ctx.globalAlpha = 1;
 
-        // Faint Grok robotic head silhouette in the center
+        // Center Grok silhouette (scaled)
         ctx.save();
         ctx.translate(cx, cy);
         ctx.globalAlpha = 0.14;
 
         ctx.strokeStyle = colors.head;
-        ctx.lineWidth = 1.6;
+        ctx.lineWidth = 1.6 * fill;
         ctx.beginPath();
-        ctx.ellipse(0, -2, 16, 17, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, -2 * s, 16 * s, 17 * s, 0, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = colors.visor;
         ctx.globalAlpha = 0.19;
         ctx.beginPath();
-        ctx.ellipse(0, -1, 9, 4.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, -1 * s, 9 * s, 4.5 * s, 0, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.globalAlpha = 0.11;
         ctx.strokeStyle = colors.head;
-        ctx.lineWidth = 1.1;
+        ctx.lineWidth = 1.1 * fill;
         ctx.beginPath();
-        ctx.moveTo(-10, 7);
-        ctx.lineTo(-5, 13);
-        ctx.moveTo(10, 7);
-        ctx.lineTo(5, 13);
+        ctx.moveTo(-10 * s, 7 * s);
+        ctx.lineTo(-5 * s, 13 * s);
+        ctx.moveTo(10 * s, 7 * s);
+        ctx.lineTo(5 * s, 13 * s);
         ctx.stroke();
 
         ctx.restore();
