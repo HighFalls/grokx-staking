@@ -738,7 +738,7 @@
             </div>
             <span class="font-semibold">1. Connect</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc Testnet (Chain ID 1244). Add the network in one click from the header.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc Testnet (Chain ID 5042002). Add the network in one click from the header.</p>
         </div>
         <div class="glass panel stat-card rounded-2xl">
           <div class="flex items-center gap-x-2.5 mb-2">
@@ -1001,7 +1001,7 @@
 
     // Arc Testnet config - standard params for wallet_addEthereumChain / switch
     const ARC_TESTNET = {
-      chainId: '0x4dc',
+      chainId: '0x4cef52',
       chainName: 'Arc Testnet',
       nativeCurrency: {
         name: 'ARC',
@@ -1401,7 +1401,7 @@
       signer = await provider.getSigner();
       userAddress = await signer.getAddress();
 
-      // Check if user is on Arc Testnet (Chain ID 1244)
+      // Check if user is on Arc Testnet (Chain ID 5042002)
       const network = await provider.getNetwork();
       const chainId = Number(network.chainId);
 
@@ -1410,7 +1410,7 @@
 
       document.getElementById("walletText").innerHTML = `<span class="font-mono">${shortenAddress(userAddress)}</span>`;
       
-      showToast("Wallet connected" + (chainId === 1244 ? " to Arc Testnet" : ""));
+      showToast("Wallet connected" + (chainId === 5042002 ? " to Arc Testnet" : ""));
       await updateUI();
 
       // Update Add to MetaMask button visibility after connecting
@@ -1640,7 +1640,7 @@
         const chainIdHex = await window.ethereum.request({ method: 'eth_chainId' });
         const chainId = parseInt(chainIdHex, 16);
 
-        if (chainId === 1244) {
+        if (chainId === 5042002) {
           if (addGrokxWrapper) addGrokxWrapper.classList.remove('hidden');
           if (addArcBtn) addArcBtn.classList.add('hidden');
         } else {
