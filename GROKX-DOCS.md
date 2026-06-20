@@ -44,6 +44,8 @@ It was created as a personal learning project by GrokRider using \*\*Grok\*\* an
 
 \- \*\*cirBTC / GROKX\*\* — Bitcoin-pegged pair → \[View Pool](https://app.synthra.org/#/pools/249039)
 
+\- \*\*USDT / GROKX\*\* — New stable pair → \[View Pool](https://app.synthra.org/#/pools/250665)
+
 
 
 \## 4. Staking Mechanics
