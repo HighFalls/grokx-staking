@@ -54,7 +54,7 @@ It was created as a personal learning project by GrokRider using \*\*Grok\*\* an
 
 \- Stake GROKX at any time
 
-\- Rewards accrue in real-time (\*\*15 GROKX per 1,000 staked per day\*\*)
+\- Rewards accrue in real-time (\*\*5 GROKX per 1,000 staked per day\*\*)
 
 \- No lock-up period
 
@@ -66,7 +66,7 @@ It was created as a personal learning project by GrokRider using \*\*Grok\*\* an
 
 
 
-\*\*This is a testnet demonstration project only.\*\*  
+\*\*This is a testnet demonstration project only.\*\*
 
 All tokens and rewards have \*\*no monetary value\*\*.
 
