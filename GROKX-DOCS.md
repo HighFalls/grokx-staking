@@ -40,7 +40,7 @@ It was created as a personal learning project by GrokRider using \*\*Grok\*\* an
 
 
 
-\- \*\*USDC / GROKX\*\* — Primary stable pair → \[View Pool](https://app.synthra.org/#/pools/238266)
+\- \*\*USDC / GROKX\*\* — Primary stable pair → \[View Pool](https://app.synthra.org/#/pools/251053)
 
 \- \*\*cirBTC / GROKX\*\* — Bitcoin-pegged pair → \[View Pool](https://app.synthra.org/#/pools/249039)
 
