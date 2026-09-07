@@ -32,4 +32,4 @@ All tokens and rewards have **no real value**. Created purely for learning and f
 ---
 
 Made with curiosity and help from Grok 🚀  
-**GrokRider**
+**gnuRider**

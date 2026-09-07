@@ -14,7 +14,7 @@
 
 
 
-It was created as a personal learning project by GrokRider using \*\*Grok\*\* and \*\*Grok Build\*\*.
+It was created as a personal learning project by gnuRider using \*\*Grok\*\* and \*\*Grok Build\*\*.
 
 
 
@@ -29,6 +29,8 @@ It was created as a personal learning project by GrokRider using \*\*Grok\*\* an
 \- \*\*Total / Max Supply\*\*: 50,000,000 GROKX
 
 \- \*\*Network\*\*: Arc Testnet
+
+\- \*\*Chain ID\*\*: 5042002
 
 \- \*\*Transfer Tax\*\*: 0%
 
@@ -96,5 +98,5 @@ Made with curiosity and a lot of help from Grok 🚀
 
 
 
-\*\*GrokRider\*\*
+\*\*gnuRider\*\*
 
