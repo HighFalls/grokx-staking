@@ -38,7 +38,17 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 3. Liquidity Pools
+\## 3. Contracts (Arc Testnet)
+
+
+
+\- \*\*Token\*\*: \[0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac](https://testnet.arcscan.app/address/0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac)
+
+\- \*\*Staking\*\*: \[0x8baC14C3E600eDE41A31582A28d86a2430D49e97](https://testnet.arcscan.app/address/0x8baC14C3E600eDE41A31582A28d86a2430D49e97)
+
+
+
+\## 4. Liquidity Pools
 
 
 
@@ -50,7 +60,7 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 4. Staking Mechanics
+\## 5. Staking Mechanics
 
 
 
@@ -64,7 +74,7 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 5. First stake on testnet
+\## 6. First stake on testnet
 
 
 
@@ -80,7 +90,7 @@ This is a testnet demo only. Follow these steps to try staking GROKX for the fir
 
 
 
-\## 6. Important Disclaimer
+\## 7. Important Disclaimer
 
 
 
@@ -90,7 +100,7 @@ All tokens and rewards have \*\*no monetary value\*\*.
 
 
 
-\## 7. Built With
+\## 8. Built With
 
 
 
