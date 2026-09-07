@@ -64,7 +64,23 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 5. Important Disclaimer
+\## 5. First stake on testnet
+
+
+
+This is a testnet demo only. Follow these steps to try staking GROKX for the first time.
+
+
+
+1. \*\*Add Arc Testnet\*\* to your wallet. Network: Arc Testnet. Chain ID: \*\*5042002\*\*.
+2. \*\*Get test GROKX\*\* on Arc Testnet. You need a small amount of GROKX in your wallet before you can stake.
+3. \*\*Connect your wallet\*\* on the live site: \[https://grokx.space](https://grokx.space)
+4. \*\*Stake a small amount\*\* of GROKX. There is no lock-up period. If you unstake later, a 0.1% unstake fee is sent back to the staking contract.
+5. \*\*Claim rewards\*\* when you are ready. Rewards accrue in real time at \*\*5 GROKX per 1,000 staked per day\*\*.
+
+
+
+\## 6. Important Disclaimer
 
 
 
@@ -74,7 +90,7 @@ All tokens and rewards have \*\*no monetary value\*\*.
 
 
 
-\## 6. Built With
+\## 7. Built With
 
 
 
