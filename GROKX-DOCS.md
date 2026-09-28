@@ -70,7 +70,7 @@ Rider is an experimental project on Arc. Follow these steps to try staking RIDR 
 
 
 
-1. \*\*Add Arc\*\* to your wallet. Network: Arc. Chain ID: \*\*5042002\*\*.
+1. \*\*Add Arc\*\* to your wallet. Network: Arc. Chain ID: \*\*5042\*\*.
 2. \*\*Get RIDR\*\* on Arc. You need a small amount of RIDR in your wallet before you can stake.
 3. \*\*Connect your wallet\*\* on the live site: \[https://rideronarc.xyz](https://rideronarc.xyz)
 4. \*\*Stake a small amount\*\* of RIDR. There is no lock-up period. If you unstake later, a 0.1% unstake fee is sent back to the staking contract.

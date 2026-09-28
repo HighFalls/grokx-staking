@@ -627,13 +627,13 @@
           <span class="text-slate-300">Arc</span>
         </div>
 
-        <!-- Add Arc Testnet to MetaMask -->
+        <!-- Add Arc to MetaMask -->
         <button id="addArcTestnetBtn"
                 onclick="addArcTestnetToMetaMask()"
                 class="hidden sm:flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/15 transition-all"
-                title="Add Arc Testnet to your MetaMask">
+                title="Add Arc to your MetaMask">
           <i class="fa-solid fa-plus text-[8px]"></i>
-          <span>Add Arc Testnet</span>
+          <span>Add Arc</span>
         </button>
 
         <a href="https://github.com/HighFalls/grokx-staking/blob/main/GROKX-DOCS.md" target="_blank" rel="noopener noreferrer"
@@ -732,7 +732,7 @@
             </div>
             <span class="font-semibold">1. Connect</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc (Chain ID 5042002). Add the network in one click from the header.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc (Chain ID 5042). Add the network in one click from the header.</p>
         </div>
         <div class="glass panel stat-card rounded-2xl">
           <div class="flex items-center gap-x-2.5 mb-2">
@@ -987,17 +987,17 @@
     // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
     const PUBLIC_RPC = "https://rpc-test-1.archiechain.io";
 
-    // Arc Testnet config - standard params for wallet_addEthereumChain / switch
+    // Arc Mainnet config - params for wallet_addEthereumChain / switch
     const ARC_TESTNET = {
-      chainId: '0x4cef52',
-      chainName: 'Arc Testnet',
+      chainId: '0x13B2',
+      chainName: 'Arc',
       nativeCurrency: {
-        name: 'ARC',
-        symbol: 'ARC',
+        name: 'USDC',
+        symbol: 'USDC',
         decimals: 18,
       },
-      rpcUrls: ['https://rpc.testnet.arc.network'],
-      blockExplorerUrls: ['https://testnet.arcscan.app'],
+      rpcUrls: ['https://rpc.mainnet.arc.io'],
+      blockExplorerUrls: ['https://explorer.arc.io'],
     };
 
     // Default reward rate from the contract (used for instant display before network fetch)
@@ -1389,7 +1389,7 @@
       signer = await provider.getSigner();
       userAddress = await signer.getAddress();
 
-      // Check if user is on Arc Testnet (Chain ID 5042002)
+      // Check if user is on Arc (Chain ID 5042)
       const network = await provider.getNetwork();
       const chainId = Number(network.chainId);
 
@@ -1398,7 +1398,7 @@
 
       document.getElementById("walletText").innerHTML = `<span class="font-mono">${shortenAddress(userAddress)}</span>`;
       
-      showToast("Wallet connected" + (chainId === 5042002 ? " to Arc" : ""));
+      showToast("Wallet connected" + (chainId === 5042 ? " to Arc" : ""));
       await updateUI();
 
       // Update Add to MetaMask button visibility after connecting
@@ -1430,10 +1430,10 @@
               params: [ARC_TESTNET],
             });
           } catch (addError) {
-            showToast("Failed to add Arc Testnet to your wallet.", "error");
+            showToast("Failed to add Arc to your wallet.", "error");
           }
         } else {
-          showToast("Please manually switch to Arc Testnet in MetaMask.", "error");
+          showToast("Please manually switch to Arc in MetaMask.", "error");
         }
       }
     }
@@ -1587,13 +1587,13 @@
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: ARC_TESTNET.chainId }],
           });
-          showToast("Arc Testnet added and switched!");
+          showToast("Arc added and switched!");
           setTimeout(() => window.location.reload(), 300);
         } catch (switchErr) {
-          showToast("Arc Testnet added to MetaMask! Please switch networks manually.");
+          showToast("Arc added to MetaMask! Please switch networks manually.");
         }
       } catch (error) {
-        console.error("Failed to add Arc Testnet:", error);
+        console.error("Failed to add Arc:", error);
         if (error.code === 4001) {
           showToast("Request rejected by user.", "error");
         } else if (error.message?.includes('already exists')) {
@@ -1603,13 +1603,13 @@
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: ARC_TESTNET.chainId }],
             });
-            showToast("Switched to Arc Testnet!");
+            showToast("Switched to Arc!");
             setTimeout(() => window.location.reload(), 300);
           } catch (switchErr) {
-            showToast("Arc Testnet is already added to your MetaMask.", "info");
+            showToast("Arc is already added to your MetaMask.", "info");
           }
         } else {
-          showToast("Failed to add Arc Testnet to MetaMask.", "error");
+          showToast("Failed to add Arc to MetaMask.", "error");
         }
       }
     }
@@ -1628,7 +1628,7 @@
         const chainIdHex = await window.ethereum.request({ method: 'eth_chainId' });
         const chainId = parseInt(chainIdHex, 16);
 
-        if (chainId === 5042002) {
+        if (chainId === 5042) {
           if (addGrokxWrapper) addGrokxWrapper.classList.remove('hidden');
           if (addArcBtn) addArcBtn.classList.add('hidden');
         } else {
@@ -1666,7 +1666,7 @@
       transactions = [];
       renderTransactions();
 
-      // Show "Add to MetaMask" button only on Arc Testnet
+      // Show "Add to MetaMask" button only on Arc
       updateAddToMetaMaskButton();
 
       // Optional auto-connect hint
