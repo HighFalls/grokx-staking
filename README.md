@@ -1,35 +1,33 @@
-# GrokX Staking
+# Rider Staking
 
-A fun experimental staking dApp built on **Arc Testnet**.
+A fun experimental staking dApp built on **Arc**.
 
 ## About
 
-GrokX ($GROKX) is a personal learning project that started as simple experiments in Remix and grew into a full-featured staking website with staking, real-time rewards, and a cosmic cyberpunk design.
+Rider ($RIDR) is a personal learning project that started as simple experiments in Remix and grew into a full-featured staking website with staking, real-time rewards, and a cosmic cyberpunk design.
 
 ## Features
 
-- Stake GROKX and earn rewards in real time
+- Stake RIDR and earn rewards in real time
 - 0.1% unstake fee that flows back into the reward pool
 - Clean, modern UI with nebula animations
 - Full MetaMask wallet integration
-- Built 100% with **Grok + Grok Build**
 
 ## Live Site
 
-→ [https://grokx.space](https://grokx.space)
+→ [https://rideronarc.xyz](https://rideronarc.xyz)
 
 ## Important
 
-**This is a testnet project only.**  
-All tokens and rewards have **no real value**. Created purely for learning and fun.
+**Rider is an experimental project on Arc.**  
+Tokens can lose value. Not financial advice.
 
 ## Built With
 
-- Solidity (Smart Contracts on Arc Testnet)
+- Solidity (Smart Contracts on Arc)
 - HTML, CSS & JavaScript (ethers.js)
-- Grok & Grok Build by xAI
+- Built with Grok and Grok Build
 
 ---
 
-Made with curiosity and help from Grok 🚀  
 **gnuRider**

@@ -1,4 +1,4 @@
-\# GrokX Project Document
+\# Rider Project Document
 
 
 
@@ -10,11 +10,11 @@
 
 
 
-\*\*GrokX\*\* is a community-driven staking token and dApp built on the \*\*Arc Testnet\*\*.
+\*\*Rider\*\* is a community-driven staking token and dApp built on \*\*Arc\*\*.
 
 
 
-It was created as a personal learning project by gnuRider using \*\*Grok\*\* and \*\*Grok Build\*\*.
+It was created as a personal learning project by gnuRider.
 
 
 
@@ -22,13 +22,13 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\- \*\*Token Name\*\*: GrokX
+\- \*\*Token Name\*\*: Rider
 
-\- \*\*Ticker\*\*: GROKX
+\- \*\*Ticker\*\*: RIDR
 
-\- \*\*Total / Max Supply\*\*: 50,000,000 GROKX
+\- \*\*Total / Max Supply\*\*: 50,000,000 RIDR
 
-\- \*\*Network\*\*: Arc Testnet
+\- \*\*Network\*\*: Arc
 
 \- \*\*Chain ID\*\*: 5042002
 
@@ -38,7 +38,7 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 3. Contracts (Arc Testnet)
+\## 3. Contracts (Arc)
 
 
 
@@ -52,11 +52,11 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\- \*\*USDC / GROKX\*\* — Primary stable pair → \[View Pool](https://app.synthra.org/#/pools/263094)
+\- \*\*USDC / RIDR\*\* — Primary stable pair → \[View Pool](https://app.synthra.org/#/pools/263094)
 
-\- \*\*cirBTC / GROKX\*\* — Bitcoin-pegged pair → \[View Pool](https://app.synthra.org/#/pools/257396)
+\- \*\*cirBTC / RIDR\*\* — Bitcoin-pegged pair → \[View Pool](https://app.synthra.org/#/pools/257396)
 
-\- \*\*USDT / GROKX\*\* — New stable pair → \[View Pool](https://app.synthra.org/#/pools/251179)
+\- \*\*USDT / RIDR\*\* — New stable pair → \[View Pool](https://app.synthra.org/#/pools/251179)
 
 
 
@@ -64,9 +64,9 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\- Stake GROKX at any time
+\- Stake RIDR at any time
 
-\- Rewards accrue in real-time (\*\*5 GROKX per 1,000 staked per day\*\*)
+\- Rewards accrue in real-time (\*\*5 RIDR per 1,000 staked per day\*\*)
 
 \- No lock-up period
 
@@ -74,19 +74,19 @@ It was created as a personal learning project by gnuRider using \*\*Grok\*\* and
 
 
 
-\## 6. First stake on testnet
+\## 6. First stake
 
 
 
-This is a testnet demo only. Follow these steps to try staking GROKX for the first time.
+Rider is an experimental project on Arc. Follow these steps to try staking RIDR for the first time.
 
 
 
-1. \*\*Add Arc Testnet\*\* to your wallet. Network: Arc Testnet. Chain ID: \*\*5042002\*\*.
-2. \*\*Get test GROKX\*\* on Arc Testnet. You need a small amount of GROKX in your wallet before you can stake.
-3. \*\*Connect your wallet\*\* on the live site: \[https://grokx.space](https://grokx.space)
-4. \*\*Stake a small amount\*\* of GROKX. There is no lock-up period. If you unstake later, a 0.1% unstake fee is sent back to the staking contract.
-5. \*\*Claim rewards\*\* when you are ready. Rewards accrue in real time at \*\*5 GROKX per 1,000 staked per day\*\*.
+1. \*\*Add Arc\*\* to your wallet. Network: Arc. Chain ID: \*\*5042002\*\*.
+2. \*\*Get RIDR\*\* on Arc. You need a small amount of RIDR in your wallet before you can stake.
+3. \*\*Connect your wallet\*\* on the live site: \[https://rideronarc.xyz](https://rideronarc.xyz)
+4. \*\*Stake a small amount\*\* of RIDR. There is no lock-up period. If you unstake later, a 0.1% unstake fee is sent back to the staking contract.
+5. \*\*Claim rewards\*\* when you are ready. Rewards accrue in real time at \*\*5 RIDR per 1,000 staked per day\*\*.
 
 
 
@@ -94,9 +94,9 @@ This is a testnet demo only. Follow these steps to try staking GROKX for the fir
 
 
 
-\*\*This is a testnet demonstration project only.\*\*
+\*\*Rider is an experimental project on Arc.\*\*
 
-All tokens and rewards have \*\*no monetary value\*\*.
+Tokens can lose value. Not financial advice.
 
 
 
@@ -108,7 +108,7 @@ All tokens and rewards have \*\*no monetary value\*\*.
 
 \- HTML, CSS, JavaScript (ethers.js)
 
-\- Grok + Grok Build by xAI
+\- Built with Grok and Grok Build
 
 
 
@@ -116,11 +116,7 @@ All tokens and rewards have \*\*no monetary value\*\*.
 
 
 
-\*\*Live Site\*\*: \[https://grokx.space](https://grokx.space)
-
-
-
-Made with curiosity and a lot of help from Grok 🚀
+\*\*Live Site\*\*: \[https://rideronarc.xyz](https://rideronarc.xyz)
 
 
 

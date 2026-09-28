@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Stake GROKX on Arc Testnet — earn rewards, claim anytime, and explore the GrokX protocol in a premium testnet demo. No real value.">
-  <title>GrokX — Stake GROKX on Arc Testnet</title>
+  <meta name="description" content="Stake RIDR on Arc — earn rewards, claim anytime, and explore Rider. Experimental project. Tokens can lose value. Not financial advice.">
+  <title>Rider — Stake RIDR on Arc</title>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -592,9 +592,9 @@
   <!-- Testnet demo notice (top strip) -->
   <div class="testnet-strip" role="status" aria-live="polite">
     <div class="content-shell py-2 sm:py-2.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center sm:text-left">
-      <span class="testnet-pill">TESTNET DEMO</span>
+      <span class="testnet-pill">NOTICE</span>
       <p class="text-xs sm:text-sm text-slate-300 leading-snug max-w-2xl">
-        <span class="text-violet-300 font-medium">GrokX</span> runs on Arc Testnet only — tokens and rewards are for demonstration and have <strong class="text-slate-200 font-semibold">no real monetary value</strong>.
+        Rider is an experimental project on Arc. Tokens can lose value. Not financial advice.
       </p>
       <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer"
          class="hidden sm:inline-flex items-center gap-x-1 text-xs text-cyan-400/90 hover:text-cyan-300 transition-colors">
@@ -610,13 +610,13 @@
       <a href="#" class="flex items-center gap-x-2.5 sm:gap-x-3 min-w-0 shrink">
         <div class="logo-glow shrink-0">
           <img src="grokx-logo.png" 
-               alt="GrokX" 
+               alt="Rider" 
                class="logo-img w-11 h-11 sm:w-14 sm:h-14 rounded-full object-cover"
-               title="Official GROKX Logo"
+               title="Rider"
                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
         </div>
         <div class="min-w-0">
-          <span class="font-display text-xl sm:text-2xl font-semibold tracking-tighter block truncate">GrokX</span>
+          <span class="font-display text-xl sm:text-2xl font-semibold tracking-tighter block truncate">Rider</span>
           <span class="hidden sm:block text-[10px] text-slate-500 tracking-wide">Staking on Arc</span>
         </div>
       </a>
@@ -624,7 +624,7 @@
       <div class="flex items-center gap-x-1.5 sm:gap-x-3 shrink-0">
         <div class="hidden sm:flex items-center gap-x-2 px-3 py-1.5 rounded-full bg-white/5 text-sm border border-white/5">
           <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-          <span class="text-slate-300">Arc Testnet</span>
+          <span class="text-slate-300">Arc</span>
         </div>
 
         <!-- Add Arc Testnet to MetaMask -->
@@ -636,16 +636,9 @@
           <span>Add Arc Testnet</span>
         </button>
 
-        <a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer"
-           class="hidden sm:inline-flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 hover:bg-cyan-500/15 hover:border-cyan-400/40 transition-all"
-           title="Need test tokens for gas? Get test ARC &amp; USDC">
-          <i class="fa-solid fa-droplet text-[8px]"></i>
-          <span>Faucet</span>
-        </a>
-
         <a href="https://github.com/HighFalls/grokx-staking/blob/main/GROKX-DOCS.md" target="_blank" rel="noopener noreferrer"
            class="hidden sm:inline-flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-violet-500/30 bg-violet-500/5 text-violet-300 hover:bg-violet-500/15 hover:border-violet-400/40 transition-all"
-           title="GROKX documentation">
+           title="Rider documentation">
           <i class="fa-solid fa-book text-[8px]"></i>
           <span>Docs</span>
         </a>
@@ -657,17 +650,17 @@
           <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
         </button>
 
-        <!-- Add GROKX to MetaMask -->
+        <!-- Add RIDR to MetaMask -->
         <div id="addToMetaMaskWrapper" class="hidden md:flex">
           <button id="addToMetaMaskBtn"
                   onclick="addGrokxToMetaMask()"
                   class="flex items-center gap-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-violet-500/30 bg-violet-500/5 text-violet-400 hover:bg-violet-500/15 hover:border-violet-500/50 hover:shadow-[0_0_8px_rgba(167,139,250,0.35)] transition-all"
-                  title="Add GROKX token to your MetaMask wallet">
+                  title="Add RIDR token to your MetaMask wallet">
             <img src="grokx-logo.png" 
                  class="logo-img w-4 h-4 rounded-full object-cover" 
-                 alt="GROKX" 
+                 alt="Rider" 
                  style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-            <span>Add GROKX to MetaMask</span>
+            <span>Add RIDR to MetaMask</span>
           </button>
         </div>
 
@@ -686,7 +679,7 @@
 
     <!-- Hero banner (banner0.png) -->
     <div class="hero-banner-wrap">
-      <img src="banner0.png" alt="GrokX — stake GROKX on Arc Testnet" 
+      <img src="banner0.png" alt="Rider — stake RIDR on Arc" 
            class="hero-banner-img"
            style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
     </div>
@@ -696,9 +689,9 @@
       <div class="hero-split">
         
         <div class="hero-copy flex-1 min-w-0 lg:max-w-none max-w-xl">
-          <p class="text-xs font-semibold tracking-widest text-violet-400/90 uppercase mb-2">Arc Testnet · GROKX Staking</p>
+          <p class="text-xs font-semibold tracking-widest text-violet-400/90 uppercase mb-2">Arc · RIDR Staking</p>
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-3">
-            <h1 class="font-display text-3xl sm:text-4xl lg:text-[2.65rem] font-semibold tracking-tighter leading-tight">Stake GROKX,<br class="sm:hidden"> earn rewards</h1>
+            <h1 class="font-display text-3xl sm:text-4xl lg:text-[2.65rem] font-semibold tracking-tighter leading-tight">Stake RIDR,<br class="sm:hidden"> earn rewards</h1>
             <div class="px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/15 to-cyan-500/10 border border-violet-500/25 text-violet-300 text-xs font-semibold flex items-center gap-x-1.5">
               <i class="fa-solid fa-shield-halved text-[10px]"></i>
               <span>ON-CHAIN</span>
@@ -706,13 +699,13 @@
           </div>
 
           <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-lg">
-            Put your GROKX to work on Arc Testnet. Rewards accrue in real time — stake, claim, or unstake on your schedule with full transparency via verified smart contracts.
+            Put your RIDR to work on Arc. Rewards accrue in real time — stake, claim, or unstake on your schedule with full transparency via verified smart contracts.
           </p>
           
           <div class="mt-4 flex flex-wrap items-center gap-2.5">
             <div class="inline-flex items-center gap-x-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs text-emerald-400 font-medium">
               <i class="fa-solid fa-circle text-[6px] animate-pulse"></i>
-              <span>Live on Arc Testnet</span>
+              <span>Live on Arc</span>
             </div>
             
             <a href="https://app.synthra.org/#/pools/263094" target="_blank" rel="noopener noreferrer"
@@ -724,7 +717,7 @@
             <a href="https://app.synthra.org/#/pools/257396" target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center gap-x-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 hover:shadow-[0_0_12px_rgba(103,232,249,0.35)] px-3 py-1.5 text-xs text-cyan-300 font-medium transition-all">
               <i class="fa-solid fa-coins"></i>
-              <span>cirBTC / GROKX</span>
+              <span>cirBTC / RIDR</span>
             </a>
           </div>
         </div>
@@ -751,7 +744,7 @@
             </div>
             <span class="font-semibold">1. Connect</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc Testnet (Chain ID 5042002). Add the network in one click from the header.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Link MetaMask and switch to Arc (Chain ID 5042002). Add the network in one click from the header.</p>
         </div>
         <div class="glass panel stat-card rounded-2xl">
           <div class="flex items-center gap-x-2.5 mb-2">
@@ -760,7 +753,7 @@
             </div>
             <span class="font-semibold">2. Stake</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed">Approve and deposit GROKX. Your position is recorded immutably on the staking contract.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Approve and deposit RIDR. Your position is recorded immutably on the staking contract.</p>
         </div>
         <div class="glass panel stat-card rounded-2xl">
           <div class="flex items-center gap-x-2.5 mb-2">
@@ -778,7 +771,7 @@
             </div>
             <span class="font-semibold">4. Claim</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed">Claim rewards anytime. Unstaking applies a 0.1% fee (testnet only) recycled into future reward funding.</p>
+          <p class="text-sm text-slate-400 leading-relaxed">Claim rewards anytime. Unstaking applies a 0.1% fee recycled into future reward funding.</p>
         </div>
       </div>
     </section>
@@ -811,10 +804,10 @@
         <div>
           <span class="text-slate-400">Protocol reward rate</span>
           <span id="rewardRate" class="font-semibold ml-2 text-violet-300">5</span>
-          <span class="text-xs text-slate-500 ml-1">GROKX per 1,000 staked / day</span>
+          <span class="text-xs text-slate-500 ml-1">RIDR per 1,000 staked / day</span>
         </div>
         <div id="noStakeHint" class="text-amber-400/90 text-xs hidden">
-          <i class="fa-solid fa-lightbulb mr-1"></i>Stake GROKX to calculate your personal APY
+          <i class="fa-solid fa-lightbulb mr-1"></i>Stake RIDR to calculate your personal APY
         </div>
       </div>
     </section>
@@ -826,7 +819,7 @@
       <div class="glass panel rounded-2xl">
         <div class="flex items-center gap-x-2 mb-1">
           <i class="fa-solid fa-arrow-down text-emerald-400"></i>
-          <span class="font-semibold text-lg">Stake GROKX</span>
+          <span class="font-semibold text-lg">Stake RIDR</span>
         </div>
         <p class="text-xs text-slate-500 mb-4">Deposit tokens into the staking contract</p>
 
@@ -849,9 +842,9 @@
       <div class="glass panel rounded-2xl">
         <div class="flex items-center gap-x-2 mb-1">
           <i class="fa-solid fa-arrow-up text-orange-400"></i>
-          <span class="font-semibold text-lg">Unstake GROKX</span>
+          <span class="font-semibold text-lg">Unstake RIDR</span>
         </div>
-        <p class="text-xs text-slate-500 mb-4">Withdraw stake · 0.1% fee applies (testnet)</p>
+        <p class="text-xs text-slate-500 mb-4">Withdraw stake · 0.1% fee applies</p>
 
         <div class="relative mb-4">
           <input type="text" inputmode="decimal" id="unstakeAmount" 
@@ -880,7 +873,7 @@
             <i class="fa-solid fa-gift text-violet-400"></i>
             <span class="font-semibold text-lg">Claim rewards</span>
           </div>
-          <p class="text-sm text-slate-400 mt-1.5 max-w-md leading-relaxed">Harvest accrued GROKX whenever you like — no minimum claim and no cooldown on testnet.</p>
+          <p class="text-sm text-slate-400 mt-1.5 max-w-md leading-relaxed">Harvest accrued RIDR whenever you like — no minimum claim and no cooldown.</p>
         </div>
         
         <div class="flex flex-col sm:items-end gap-y-3 w-full sm:w-auto">
@@ -907,12 +900,12 @@
               <div class="flex items-center gap-x-2 font-semibold">
                 <img src="grokx-logo.png" class="logo-img w-5 h-5 rounded-full object-cover" alt="" aria-hidden="true"
                      style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-                GrokX (GROKX)
+                Rider (RIDR)
               </div>
             </div>
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Max supply</span>
-              <span class="font-semibold">50,000,000 GROKX</span>
+              <span class="font-semibold">50,000,000 RIDR</span>
             </div>
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Unstake fee</span>
@@ -941,17 +934,17 @@
               <div class="inline-flex flex-wrap items-center gap-x-3">
                 <a href="https://app.synthra.org/#/pools/263094" target="_blank" rel="noopener noreferrer"
                    class="explorer-link font-mono text-xs inline-flex items-center gap-x-1">
-                  USDC / GROKX
+                  USDC / RIDR
                   <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 shrink-0"></i>
                 </a>
                 <a href="https://app.synthra.org/#/pools/251179" target="_blank" rel="noopener noreferrer"
                    class="explorer-link font-mono text-xs inline-flex items-center gap-x-1">
-                  USDT / GROKX
+                  USDT / RIDR
                   <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 shrink-0"></i>
                 </a>
                 <a href="https://app.synthra.org/#/pools/257396" target="_blank" rel="noopener noreferrer"
                    class="explorer-link font-mono text-xs inline-flex items-center gap-x-1">
-                  cirBTC / GROKX
+                  cirBTC / RIDR
                   <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 shrink-0"></i>
                 </a>
               </div>
@@ -1000,13 +993,16 @@
     <div class="content-shell flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
       <div class="flex items-center gap-x-2">
         <img src="grokx-logo.png" alt="" class="w-5 h-5 rounded-full opacity-80" aria-hidden="true">
-        <span>© 2026 GrokX · Testnet demo at <a href="https://grokx.space" class="text-violet-400 hover:text-violet-300">grokx.space</a></span>
+        <span class="flex flex-col items-center sm:items-start gap-y-0.5">
+          <span>© 2026 Rider · <a href="https://rideronarc.xyz" class="text-violet-400 hover:text-violet-300">rideronarc.xyz</a></span>
+          <span class="text-[10px] text-slate-600">Built with Grok and Grok Build</span>
+        </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
         <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Arc Explorer</a>
-        <a href="https://app.synthra.org/#/pools/263094" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">USDC / GROKX</a>
-        <a href="https://app.synthra.org/#/pools/251179" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">USDT / GROKX</a>
-        <a href="https://app.synthra.org/#/pools/257396" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">cirBTC / GROKX</a>
+        <a href="https://app.synthra.org/#/pools/263094" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">USDC / RIDR</a>
+        <a href="https://app.synthra.org/#/pools/251179" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">USDT / RIDR</a>
+        <a href="https://app.synthra.org/#/pools/257396" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">cirBTC / RIDR</a>
       </div>
     </div>
   </footer>
@@ -1020,7 +1016,7 @@
     const stakingAddress = "0x8baC14C3E600eDE41A31582A28d86a2430D49e97";
     const ARC_EXPLORER = "https://testnet.arcscan.app";
 
-    // Official GROKX Logo (latest IPFS via retired-pony lighthouse for MetaMask token image; local grokx-logo.png used for on-page icons)
+    // Official RIDR Logo (latest IPFS via retired-pony lighthouse for MetaMask token image; local grokx-logo.png used for on-page icons)
     const TOKEN_LOGO_URL = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
 
     // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
@@ -1134,7 +1130,7 @@
                 <div>
                   <div class="text-sm font-medium text-slate-400">No transactions yet</div>
                   <div class="text-xs mt-1 max-w-[280px] mx-auto leading-snug">
-                    Connect your wallet and stake GROKX — stakes, claims, and unstakes will show up here.
+                    Connect your wallet and stake RIDR — stakes, claims, and unstakes will show up here.
                   </div>
                 </div>
               </div>
@@ -1166,7 +1162,7 @@
               ${shortenAddress(tx.wallet || tx.from || '')}
             </td>
             <td class="px-5 py-3 font-mono text-sm">
-              ${tx.amount.toLocaleString()} GROKX
+              ${tx.amount.toLocaleString()} RIDR
             </td>
             <td class="px-5 py-3 text-xs text-slate-400">
               ${dateStr} <span class="text-slate-500">${timeStr}</span>
@@ -1367,14 +1363,14 @@
         const hasStake = staked > 0;
 
         // Stats
-        document.getElementById("balance").textContent = formatNumber(balance) + " GROKX";
-        document.getElementById("stakedBalance").textContent = formatNumber(stakedInfo.staked) + " GROKX";
+        document.getElementById("balance").textContent = formatNumber(balance) + " RIDR";
+        document.getElementById("stakedBalance").textContent = formatNumber(stakedInfo.staked) + " RIDR";
         document.getElementById("rewards").textContent = formatNumber(stakedInfo.rewards);
 
         // Update claimable amount beside the button
         const claimableEl = document.getElementById("claimableAmount");
         if (claimableEl) {
-          claimableEl.textContent = formatNumber(stakedInfo.rewards) + " GROKX";
+          claimableEl.textContent = formatNumber(stakedInfo.rewards) + " RIDR";
         }
 
         // Reward Rate
@@ -1437,7 +1433,7 @@
 
       document.getElementById("walletText").innerHTML = `<span class="font-mono">${shortenAddress(userAddress)}</span>`;
       
-      showToast("Wallet connected" + (chainId === 5042002 ? " to Arc Testnet" : ""));
+      showToast("Wallet connected" + (chainId === 5042002 ? " to Arc" : ""));
       await updateUI();
 
       // Update Add to MetaMask button visibility after connecting
@@ -1552,7 +1548,7 @@
         const tx = await stakingContract.claimRewards();
         await tx.wait();
         showToast("Rewards claimed!");
-        addTransaction('Claim', document.getElementById("claimableAmount").textContent.replace(' GROKX',''), userAddress);
+        addTransaction('Claim', document.getElementById("claimableAmount").textContent.replace(' RIDR',''), userAddress);
         await updateUI();
       } catch (e) {
         showToast("Claim failed", "error");
@@ -1571,9 +1567,9 @@
         // Using the token logo URL (latest IPFS https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki for reliable MetaMask, new clean astronaut helmet) for token metadata in MetaMask
         const imageUrl = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
 
-        console.log('[MetaMask] Adding GROKX token with metadata:', {
+        console.log('[MetaMask] Adding RIDR token with metadata:', {
           address: tokenAddress,
-          symbol: 'GROKX',
+          symbol: 'RIDR',
           decimals: 18,
           image: imageUrl
         });
@@ -1584,7 +1580,7 @@
             type: 'ERC20',
             options: {
               address: tokenAddress,
-              symbol: 'GROKX',
+              symbol: 'RIDR',
               decimals: 18,
               image: imageUrl,
             },
@@ -1592,7 +1588,7 @@
         });
 
         if (wasAdded) {
-          showToast("GROKX successfully added to MetaMask!");
+          showToast("RIDR successfully added to MetaMask!");
           console.log('[MetaMask] Token added successfully with new logo (grokx-logo.png via latest IPFS).');
         } else {
           console.log('[MetaMask] User cancelled or token already exists.');
@@ -1602,9 +1598,9 @@
         if (error.code === 4001) {
           showToast("Request rejected by user.", "error");
         } else if (error.message?.includes('already exists')) {
-          showToast("GROKX is already in your MetaMask wallet.", "info");
+          showToast("RIDR is already in your MetaMask wallet.", "info");
         } else {
-          showToast("Failed to add GROKX to MetaMask. Check console for details.", "error");
+          showToast("Failed to add RIDR to MetaMask. Check console for details.", "error");
         }
       }
     }
