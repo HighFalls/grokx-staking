@@ -48,19 +48,7 @@ It was created as a personal learning project by gnuRider.
 
 
 
-\## 4. Liquidity Pools
-
-
-
-\- \*\*USDC / RIDR\*\* — Primary stable pair → \[View Pool](https://app.synthra.org/#/pools/263094)
-
-\- \*\*cirBTC / RIDR\*\* — Bitcoin-pegged pair → \[View Pool](https://app.synthra.org/#/pools/257396)
-
-\- \*\*USDT / RIDR\*\* — New stable pair → \[View Pool](https://app.synthra.org/#/pools/251179)
-
-
-
-\## 5. Staking Mechanics
+\## 4. Staking Mechanics
 
 
 
@@ -74,7 +62,7 @@ It was created as a personal learning project by gnuRider.
 
 
 
-\## 6. First stake
+\## 5. First stake
 
 
 
@@ -90,7 +78,7 @@ Rider is an experimental project on Arc. Follow these steps to try staking RIDR 
 
 
 
-\## 7. Important Disclaimer
+\## 6. Important Disclaimer
 
 
 
@@ -100,7 +88,7 @@ Tokens can lose value. Not financial advice.
 
 
 
-\## 8. Built With
+\## 7. Built With
 
 
 
