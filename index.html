@@ -800,7 +800,7 @@
       <div class="mt-4 glass panel rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
         <div>
           <span class="text-slate-400">Protocol reward rate</span>
-          <span id="rewardRate" class="font-semibold ml-2 text-violet-300">1</span>
+          <span id="rewardRate" class="font-semibold ml-2 text-violet-300">0.25</span>
           <span class="text-xs text-slate-500 ml-1">RIDR per 1,000 staked per day</span>
         </div>
         <div id="noStakeHint" class="text-amber-400/90 text-xs hidden">
@@ -1018,8 +1018,8 @@
       blockExplorerUrls: ['https://explorer.arc.io'],
     };
 
-    // Default reward rate shown before the mainnet read completes (1 RIDR per 1,000 staked per day)
-    const DEFAULT_REWARD_RATE = 1;
+    // Default reward rate shown before a wallet read (0.25 RIDR per 1,000 staked per day)
+    const DEFAULT_REWARD_RATE = 0.25;
 
     const tokenAbi = [
       "function balanceOf(address) view returns (uint256)",
