@@ -26,7 +26,7 @@ It was created as a personal learning project by gnuRider.
 
 \- \*\*Ticker\*\*: RIDR
 
-\- \*\*Total / Max Supply\*\*: 50,000,000 RIDR
+\- \*\*Total / Max Supply\*\*: 1,000,000,000 RIDR
 
 \- \*\*Network\*\*: Arc
 

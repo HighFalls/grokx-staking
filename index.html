@@ -900,7 +900,7 @@
             </div>
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Max supply</span>
-              <span class="font-semibold">50,000,000 RIDR</span>
+              <span class="font-semibold">1,000,000,000 RIDR</span>
             </div>
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Unstake fee</span>
@@ -1028,7 +1028,6 @@
       "function stakes(address account) view returns (uint256)",
       "function totalStaked() view returns (uint256)",
       "function rewardsPerThousandPerDay() view returns (uint256)",
-      "function rewardPool() view returns (uint256)",
       "event Staked(address indexed user, uint256 amount)",
       "event Unstaked(address indexed user, uint256 amount, uint256 fee)",
       "event Claimed(address indexed user, uint256 amount)"
@@ -1267,23 +1266,32 @@
     }
 
     // ==================== CONTRACT READS ====================
+    // Claimable balance is pendingRewards(connected wallet) only.
+    // A revert or missing function shows 0.00. Never substitute rewardPool().
     async function getStakedInfo() {
-      if (!stakingContract || !userAddress) return { staked: "0", rewards: "0" };
-      
+      if (!stakingContract || !userAddress) return { staked: "0", rewards: "0.00", pendingOk: false };
+
+      let staked = "0";
       try {
-        const [staked, rewards] = await Promise.all([
-          stakingContract.stakes(userAddress),
-          stakingContract.pendingRewards(userAddress)
-        ]);
-        
-        return {
-          staked: ethers.formatUnits(staked || 0n, 18),
-          rewards: ethers.formatUnits(rewards || 0n, 18)
-        };
+        const rawStake = await stakingContract.stakes(userAddress);
+        staked = ethers.formatUnits(rawStake || 0n, 18);
       } catch (e) {
-        console.warn("Failed to read staking data:", e);
-        return { staked: "0", rewards: "0" };
+        console.warn("Failed to read stake:", e);
       }
+
+      let rewards = "0.00";
+      let pendingOk = false;
+      try {
+        const rawPending = await stakingContract.pendingRewards(userAddress);
+        rewards = ethers.formatUnits(rawPending || 0n, 18);
+        pendingOk = true;
+      } catch (e) {
+        console.warn("pendingRewards failed:", e);
+        rewards = "0.00";
+        pendingOk = false;
+      }
+
+      return { staked, rewards, pendingOk };
     }
 
     async function fetchRewardRate() {
@@ -1339,14 +1347,16 @@
         const hasStake = staked > 0;
 
         // Stats
+        const pendingText = stakedInfo.pendingOk ? formatNumber(stakedInfo.rewards) : "0.00";
+
         document.getElementById("balance").textContent = formatNumber(balance) + " RIDR";
         document.getElementById("stakedBalance").textContent = formatNumber(stakedInfo.staked) + " RIDR";
-        document.getElementById("rewards").textContent = formatNumber(stakedInfo.rewards);
+        document.getElementById("rewards").textContent = pendingText;
 
-        // Update claimable amount beside the button
+        // Claim card uses the same pendingRewards(user) figure
         const claimableEl = document.getElementById("claimableAmount");
         if (claimableEl) {
-          claimableEl.textContent = formatNumber(stakedInfo.rewards) + " RIDR";
+          claimableEl.textContent = pendingText + " RIDR";
         }
 
         // Reward Rate
@@ -1367,7 +1377,7 @@
 
         // Button states
         document.getElementById("unstakeBtn").disabled = !hasStake;
-        document.getElementById("claimBtn").disabled = parseFloat(stakedInfo.rewards) <= 0;
+        document.getElementById("claimBtn").disabled = !stakedInfo.pendingOk || parseFloat(stakedInfo.rewards) <= 0;
 
       } catch (err) {
         console.error("UI update failed:", err);
@@ -1521,7 +1531,9 @@
 
       isProcessing = true;
       try {
-        const tx = await stakingContract.claimRewards();
+        const tx = typeof stakingContract.claim === "function"
+          ? await stakingContract.claim()
+          : await stakingContract.claimRewards();
         await tx.wait();
         showToast("Rewards claimed!");
         addTransaction('Claim', document.getElementById("claimableAmount").textContent.replace(' RIDR',''), userAddress);
