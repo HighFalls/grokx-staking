@@ -30,7 +30,7 @@ It was created as a personal learning project by gnuRider.
 
 \- \*\*Network\*\*: Arc
 
-\- \*\*Chain ID\*\*: 5042002
+\- \*\*Chain ID\*\*: 5042
 
 \- \*\*Transfer Tax\*\*: 0%
 
@@ -42,9 +42,9 @@ It was created as a personal learning project by gnuRider.
 
 
 
-\- \*\*Token\*\*: \[0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac](https://testnet.arcscan.app/address/0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac)
+\- \*\*Token\*\*: \[0x53a06b1568b9B9405522d64036dE912D274a0087](https://explorer.arc.io/token/0x53a06b1568b9B9405522d64036dE912D274a0087)
 
-\- \*\*Staking\*\*: \[0x8baC14C3E600eDE41A31582A28d86a2430D49e97](https://testnet.arcscan.app/address/0x8baC14C3E600eDE41A31582A28d86a2430D49e97)
+\- \*\*Staking\*\*: \[0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5](https://explorer.arc.io/address/0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5)
 
 
 
@@ -54,7 +54,7 @@ It was created as a personal learning project by gnuRider.
 
 \- Stake RIDR at any time
 
-\- Rewards accrue in real-time (\*\*5 RIDR per 1,000 staked per day\*\*)
+\- Rewards accrue in real-time (\*\*1 RIDR per 1,000 staked per day\*\*)
 
 \- No lock-up period
 
@@ -74,7 +74,7 @@ Rider is an experimental project on Arc. Follow these steps to try staking RIDR 
 2. \*\*Get RIDR\*\* on Arc. You need a small amount of RIDR in your wallet before you can stake.
 3. \*\*Connect your wallet\*\* on the live site: \[https://rideronarc.xyz](https://rideronarc.xyz)
 4. \*\*Stake a small amount\*\* of RIDR. There is no lock-up period. If you unstake later, a 0.1% unstake fee is sent back to the staking contract.
-5. \*\*Claim rewards\*\* when you are ready. Rewards accrue in real time at \*\*5 RIDR per 1,000 staked per day\*\*.
+5. \*\*Claim rewards\*\* when you are ready. Rewards accrue in real time at \*\*1 RIDR per 1,000 staked per day\*\*.
 
 
 

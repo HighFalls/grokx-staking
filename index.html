@@ -596,7 +596,7 @@
       <p class="text-xs sm:text-sm text-slate-300 leading-snug max-w-2xl">
         Rider is an experimental project on Arc. Tokens can lose value. Not financial advice.
       </p>
-      <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer"
+      <a href="https://explorer.arc.io" target="_blank" rel="noopener noreferrer"
          class="hidden sm:inline-flex items-center gap-x-1 text-xs text-cyan-400/90 hover:text-cyan-300 transition-colors">
         <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
         Arc Explorer
@@ -707,6 +707,13 @@
               <i class="fa-solid fa-circle text-[6px] animate-pulse"></i>
               <span>Live on Arc</span>
             </div>
+            <a id="tradeBtn"
+               href="https://lift.fun/token/0x53a06b1568b9B9405522d64036dE912D274a0087"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-x-2 rounded-xl bg-violet-500/10 border border-violet-500/30 px-3 py-1.5 text-xs text-violet-300 font-medium hover:bg-violet-500/20 transition-colors">
+              <i class="fa-solid fa-arrow-right-arrow-left text-[10px]"></i>
+              <span>Trade</span>
+            </a>
           </div>
         </div>
 
@@ -791,8 +798,8 @@
       <div class="mt-4 glass panel rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
         <div>
           <span class="text-slate-400">Protocol reward rate</span>
-          <span id="rewardRate" class="font-semibold ml-2 text-violet-300">5</span>
-          <span class="text-xs text-slate-500 ml-1">RIDR per 1,000 staked / day</span>
+          <span id="rewardRate" class="font-semibold ml-2 text-violet-300">1</span>
+          <span class="text-xs text-slate-500 ml-1">RIDR per 1,000 staked per day</span>
         </div>
         <div id="noStakeHint" class="text-amber-400/90 text-xs hidden">
           <i class="fa-solid fa-lightbulb mr-1"></i>Stake RIDR to calculate your personal APY
@@ -903,17 +910,17 @@
           <div class="space-y-3">
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Token contract</span>
-              <a href="https://testnet.arcscan.app/address/0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac" target="_blank" rel="noopener noreferrer"
+              <a id="tokenContractLink" href="https://explorer.arc.io/token/0x53a06b1568b9B9405522d64036dE912D274a0087" target="_blank" rel="noopener noreferrer"
                  class="explorer-link font-mono text-xs break-all inline-flex items-start gap-x-1">
-                0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac
+                <span id="tokenContractText">0x53a06b1568b9B9405522d64036dE912D274a0087</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 mt-0.5 shrink-0"></i>
               </a>
             </div>
             <div>
               <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Staking contract</span>
-              <a href="https://testnet.arcscan.app/address/0x8baC14C3E600eDE41A31582A28d86a2430D49e97" target="_blank" rel="noopener noreferrer"
+              <a id="stakingContractLink" href="https://explorer.arc.io/address/0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5" target="_blank" rel="noopener noreferrer"
                  class="explorer-link font-mono text-xs break-all inline-flex items-start gap-x-1">
-                0x8baC14C3E600eDE41A31582A28d86a2430D49e97
+                <span id="stakingContractText">0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 mt-0.5 shrink-0"></i>
               </a>
             </div>
@@ -967,7 +974,7 @@
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-        <a href="https://testnet.arcscan.app" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Arc Explorer</a>
+        <a href="https://explorer.arc.io" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Arc Explorer</a>
       </div>
     </div>
   </footer>
@@ -977,15 +984,16 @@
 
   <script>
     // ==================== CONFIG ====================
-    const tokenAddress = "0x1f5D901293afF4d70f25eD70Cfb2eD92dd7E91ac";
-    const stakingAddress = "0x8baC14C3E600eDE41A31582A28d86a2430D49e97";
-    const ARC_EXPLORER = "https://testnet.arcscan.app";
+    const tokenAddress = "0x53a06b1568b9B9405522d64036dE912D274a0087";
+    const stakingAddress = "0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5";
+    const ARC_EXPLORER = "https://explorer.arc.io";
+    const TRADE_URL = "https://lift.fun/token/0x53a06b1568b9B9405522d64036dE912D274a0087";
 
     // Official RIDR Logo (latest IPFS via retired-pony lighthouse for MetaMask token image; local grokx-logo.png used for on-page icons)
     const TOKEN_LOGO_URL = 'https://retired-pony-qzand.lighthouseweb3.xyz/ipfs/bafkreibzplpk7un3ldka7thbtwy4vadugrnil64tswqhkjwiuubdlac5ki';
 
-    // Public RPC for reading contract data without a wallet (Arc Testnet / Archie Chain)
-    const PUBLIC_RPC = "https://rpc-test-1.archiechain.io";
+    // Public RPC for reading contract data without a wallet (Arc mainnet)
+    const PUBLIC_RPC = "https://rpc.mainnet.arc.io";
 
     // Arc Mainnet config - params for wallet_addEthereumChain / switch
     const ARC_TESTNET = {
@@ -1000,26 +1008,29 @@
       blockExplorerUrls: ['https://explorer.arc.io'],
     };
 
-    // Default reward rate from the contract (used for instant display before network fetch)
-    const DEFAULT_REWARD_RATE = 5;
+    // Default reward rate shown before the mainnet read completes (1 RIDR per 1,000 staked per day)
+    const DEFAULT_REWARD_RATE = 1;
 
     const tokenAbi = [
       "function balanceOf(address) view returns (uint256)",
       "function approve(address, uint256) returns (bool)",
       "function allowance(address, address) view returns (uint256)",
-      "function totalSupply() view returns (uint256)"
+      "function decimals() view returns (uint8)",
+      "function symbol() view returns (string)"
     ];
 
     const stakingAbi = [
-      "function stake(uint256 _amount)",
-      "function unstake(uint256 _amount)",
+      "function stake(uint256 amount)",
+      "function unstake(uint256 amount)",
+      "function claim()",
       "function claimRewards()",
-      "function stakes(address) view returns (uint256 amount, uint256 lastRewardTime)",
-      "function pendingRewards(address) view returns (uint256)",
-      "function rewardRate() view returns (uint256)",
-      // Events for on-chain history (add these to your contract if not present)
+      "function pendingRewards(address account) view returns (uint256)",
+      "function stakes(address account) view returns (uint256)",
+      "function totalStaked() view returns (uint256)",
+      "function rewardsPerThousandPerDay() view returns (uint256)",
+      "function rewardPool() view returns (uint256)",
       "event Staked(address indexed user, uint256 amount)",
-      "event Unstaked(address indexed user, uint256 amount)",
+      "event Unstaked(address indexed user, uint256 amount, uint256 fee)",
       "event Claimed(address indexed user, uint256 amount)"
     ];
 
@@ -1160,7 +1171,7 @@
       if (!stakingContract || !userAddress) return;
 
       try {
-        // Query recent events (last ~8000 blocks is usually sufficient on testnet)
+        // Query recent events (last ~8000 blocks)
         const fromBlock = -8000;
 
         const [stakedEvents, unstakedEvents, claimedEvents] = await Promise.all([
@@ -1260,13 +1271,13 @@
       if (!stakingContract || !userAddress) return { staked: "0", rewards: "0" };
       
       try {
-        const [stakeInfo, rewards] = await Promise.all([
+        const [staked, rewards] = await Promise.all([
           stakingContract.stakes(userAddress),
           stakingContract.pendingRewards(userAddress)
         ]);
         
         return {
-          staked: ethers.formatUnits(stakeInfo.amount || 0n, 18),
+          staked: ethers.formatUnits(staked || 0n, 18),
           rewards: ethers.formatUnits(rewards || 0n, 18)
         };
       } catch (e) {
@@ -1278,8 +1289,8 @@
     async function fetchRewardRate() {
       if (!stakingContract) return 0;
       try {
-        const rate = await stakingContract.rewardRate();
-        currentRewardRate = Number(rate);
+        const rate = await stakingContract.rewardsPerThousandPerDay();
+        currentRewardRate = Number(ethers.formatUnits(rate, 18));
         return currentRewardRate;
       } catch (e) {
         return 0;
@@ -1293,8 +1304,8 @@
 
         // Public staking contract for reward rate
         const publicStaking = new ethers.Contract(stakingAddress, stakingAbi, publicProvider);
-        const rate = await publicStaking.rewardRate();
-        currentRewardRate = Number(rate);
+        const rate = await publicStaking.rewardsPerThousandPerDay();
+        currentRewardRate = Number(ethers.formatUnits(rate, 18));
 
         // Update Reward Rate display (public, no wallet needed)
         const rateEl = document.getElementById("rewardRate");
@@ -1643,6 +1654,17 @@
 
     // ==================== INIT ====================
     function init() {
+      const tradeBtn = document.getElementById("tradeBtn");
+      if (tradeBtn) tradeBtn.href = TRADE_URL;
+      const tokenLink = document.getElementById("tokenContractLink");
+      const tokenText = document.getElementById("tokenContractText");
+      if (tokenLink) tokenLink.href = `${ARC_EXPLORER}/token/${tokenAddress}`;
+      if (tokenText) tokenText.textContent = tokenAddress;
+      const stakingLink = document.getElementById("stakingContractLink");
+      const stakingText = document.getElementById("stakingContractText");
+      if (stakingLink) stakingLink.href = `${ARC_EXPLORER}/address/${stakingAddress}`;
+      if (stakingText) stakingText.textContent = stakingAddress;
+
       // Set initial values for user-specific data
       document.getElementById("balance").textContent = "Connect wallet";
       document.getElementById("stakedBalance").textContent = "—";
