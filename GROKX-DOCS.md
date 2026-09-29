@@ -44,7 +44,7 @@ It was created as a personal learning project by gnuRider.
 
 \- \*\*Token\*\*: \[0x53a06b1568b9B9405522d64036dE912D274a0087](https://explorer.arc.io/token/0x53a06b1568b9B9405522d64036dE912D274a0087)
 
-\- \*\*Staking\*\*: \[0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5](https://explorer.arc.io/address/0x3DFEAF9dC503a9432Ff556B4540326185e4aFbd5)
+\- \*\*Staking\*\*: \[0xe85720748680b6b2D7301A04aEAD421bb341D7a6](https://explorer.arc.io/address/0xe85720748680b6b2D7301A04aEAD421bb341D7a6)
 
 
 
