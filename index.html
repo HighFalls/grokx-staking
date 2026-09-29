@@ -628,20 +628,22 @@
         </div>
 
         <!-- Add Arc to MetaMask -->
+        <div class="hidden sm:inline-grid grid-flow-col auto-cols-fr items-stretch gap-x-1.5 sm:gap-x-3">
         <button id="addArcTestnetBtn"
                 onclick="addArcTestnetToMetaMask()"
-                class="hidden sm:flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/15 transition-all"
+                class="hidden sm:flex w-full items-center justify-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/15 transition-all"
                 title="Add Arc to your MetaMask">
           <i class="fa-solid fa-plus text-[8px]"></i>
           <span>Add Arc</span>
         </button>
 
         <a href="https://github.com/HighFalls/grokx-staking/blob/main/GROKX-DOCS.md" target="_blank" rel="noopener noreferrer"
-           class="hidden sm:inline-flex items-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-violet-500/30 bg-violet-500/5 text-violet-300 hover:bg-violet-500/15 hover:border-violet-400/40 transition-all"
+           class="hidden sm:inline-flex w-full items-center justify-center gap-x-1 px-2 py-1 rounded-full text-[10px] font-medium border border-violet-500/30 bg-violet-500/5 text-violet-300 hover:bg-violet-500/15 hover:border-violet-400/40 transition-all"
            title="Rider documentation">
           <i class="fa-solid fa-book text-[8px]"></i>
           <span>Docs</span>
         </a>
+        </div>
 
         <!-- Theme Toggle -->
         <button id="themeToggle"
@@ -702,15 +704,15 @@
             Put your RIDR to work on Arc. Rewards accrue in real time — stake, claim, or unstake on your schedule with full transparency via verified smart contracts.
           </p>
           
-          <div class="mt-4 flex flex-wrap items-center gap-2.5">
-            <div class="inline-flex items-center gap-x-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs text-emerald-400 font-medium">
+          <div class="mt-4 inline-grid w-fit self-start grid-flow-col auto-cols-fr items-stretch gap-2.5">
+            <div class="inline-flex w-full items-center justify-center gap-x-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs text-emerald-400 font-medium">
               <i class="fa-solid fa-circle text-[6px] animate-pulse"></i>
               <span>Live on Arc</span>
             </div>
             <a id="tradeBtn"
                href="https://lift.fun/token/0x53a06b1568b9B9405522d64036dE912D274a0087"
                target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-x-2 rounded-xl bg-violet-500/10 border border-violet-500/30 px-3 py-1.5 text-xs text-violet-300 font-medium hover:bg-violet-500/20 transition-colors">
+               class="inline-flex w-full items-center justify-center gap-x-2 rounded-xl bg-violet-500/10 border border-violet-500/30 px-3 py-1.5 text-xs text-violet-300 font-medium hover:bg-violet-500/20 transition-colors">
               <i class="fa-solid fa-arrow-right-arrow-left text-[10px]"></i>
               <span>Trade</span>
             </a>
@@ -921,6 +923,14 @@
               <a id="stakingContractLink" href="https://explorer.arc.io/address/0xe85720748680b6b2D7301A04aEAD421bb341D7a6" target="_blank" rel="noopener noreferrer"
                  class="explorer-link font-mono text-xs break-all inline-flex items-start gap-x-1">
                 <span id="stakingContractText">0xe85720748680b6b2D7301A04aEAD421bb341D7a6</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 mt-0.5 shrink-0"></i>
+              </a>
+            </div>
+            <div>
+              <span class="text-slate-500 block text-[10px] uppercase tracking-wider mb-0.5">Trade</span>
+              <a id="tradeContractLink" href="https://lift.fun/token/0x53a06b1568b9B9405522d64036dE912D274a0087" target="_blank" rel="noopener noreferrer"
+                 class="explorer-link font-mono text-xs break-all inline-flex items-start gap-x-1">
+                <span>Lift</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 mt-0.5 shrink-0"></i>
               </a>
             </div>
@@ -1668,6 +1678,8 @@
     function init() {
       const tradeBtn = document.getElementById("tradeBtn");
       if (tradeBtn) tradeBtn.href = TRADE_URL;
+      const tradeContractLink = document.getElementById("tradeContractLink");
+      if (tradeContractLink) tradeContractLink.href = TRADE_URL;
       const tokenLink = document.getElementById("tokenContractLink");
       const tokenText = document.getElementById("tokenContractText");
       if (tokenLink) tokenLink.href = `${ARC_EXPLORER}/token/${tokenAddress}`;
